@@ -4,12 +4,12 @@
 
     $link = mysqli_connect("localhost", "---", "---", "---");
 
-    if (mysqli_connect_errno()) {
+    #if (mysqli_connect_errno()) {
         
-        print_r(mysqli_connect_error());
-        exit();
+    #    print_r(mysqli_connect_error());
+    #    exit();
         
-    }
+    #}
 
 
 
