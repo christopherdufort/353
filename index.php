@@ -5,13 +5,13 @@
     include("views/header.php");
 
     # Redirect to different pages in views/
-    if ($_GET['page'] == 'example1') {
+    if ($_GET['page'] == 'accounts') {
         
-        include("views/example1.php");
+        include("views/accounts.php");
         
-    } else if ($_GET['page'] == 'example2') {
+    } else if ($_GET['page'] == 'login') {
         
-        include("views/example2.php");
+        include("views/login.php");
         
     } else {
 

@@ -1,7 +1,7 @@
 <main role="main" class="container my-5">
     <div class="card">
         <div class="card-header">
-            Just some example
+            Checkings
         </div>
         <div class="card-body">
             <h5 class="card-title">Special title treatment</h5>

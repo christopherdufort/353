@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=example1">Example Link</a>
+                        <a class="nav-link" href="?page=accounts"> My Accounts </a>
                     </li>
                 </ul>
                 <div class="form-inline pull-xs-right">
@@ -34,7 +34,9 @@
                     
                     <?php } else { ?>
                     
+                    <a class="nav-lin" href="?page=login">
                     <button class="btn btn-success-outline" data-toggle="modal" data-target="#myModal"> Login </button>
+                </a>
                     
                     <?php } ?>
 
