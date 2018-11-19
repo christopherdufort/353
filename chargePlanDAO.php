@@ -104,4 +104,84 @@
 				unset($pdo);
 			}
 		}
+
+		public function getChargePlansByAccount($number){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * 
+					FROM charge_plan 
+					JOIN account ON charge_id = charge_plan_id 
+					WHERE account_number=:number");
+				$stmt->bindValue(':number', $number);
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
+				while ($chargePlan = $stmt->fetch())
+				{
+					$responseRow["id"] = $chargePlan->getId(); 
+					$responseRow["name"] = $chargePlan->getName();
+					$responseRow["charge"] = $chargePlan->getCharge();
+					$responseRow["limit"] = $chargePlan->getLimit();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
+		
+		public function getChargePlansByService($id){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * 
+					FROM charge_plan 
+					JOIN service ON charge_id = charge_plan_id 
+					WHERE service_id=:id");
+				$stmt->bindValue(':id', $id);
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
+				while ($chargePlan = $stmt->fetch())
+				{
+					$responseRow["id"] = $chargePlan->getId(); 
+					$responseRow["name"] = $chargePlan->getName();
+					$responseRow["charge"] = $chargePlan->getCharge();
+					$responseRow["limit"] = $chargePlan->getLimit();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
+		
+		public function getAllChargePlans(){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * FROM charge_plan");
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
+				while ($chargePlan = $stmt->fetch())
+				{
+					$responseRow["id"] = $chargePlan->getId(); 
+					$responseRow["name"] = $chargePlan->getName();
+					$responseRow["charge"] = $chargePlan->getCharge();
+					$responseRow["limit"] = $chargePlan->getLimit();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
 	}

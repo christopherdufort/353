@@ -114,4 +114,31 @@
 				unset($pdo);
 			}
 		}
+
+		public function getAllBranches(){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * FROM branch");
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Branch');
+				while ($branch = $stmt->fetch())
+				{
+					$responseRow["id"] = $branch->getId(); 
+					$responseRow["name"] = $branch->getName();
+					$responseRow["location"] = $branch->getLocation();
+					$responseRow["phone"] = $branch->getPhone();
+					$responseRow["fax"] = $branch->getFax();
+					$responseRow["openingDate"] = $branch->getOpeningDate();
+					$responseRow["managerId"] = $branch->getManagerId();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
 	}

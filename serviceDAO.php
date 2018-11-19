@@ -90,16 +90,69 @@
 
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Service');
 
-				while ($branch = $stmt->fetch())
+				while ($service = $stmt->fetch())
 				{
-				    $response["id"] = $branch->getId(); 
-				    $response["name"] = $branch->getName();
-				    $response["interestRate"] = $branch->getInterestRate();
-				    $response["managerId"] = $branch->getManagerId();
+				    $response["id"] = $service->getId(); 
+				    $response["name"] = $service->getName();
+				    $response["interestRate"] = $service->getInterestRate();
+				    $response["managerId"] = $service->getManagerId();
 				}
 
 				return $response;
 
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
+
+		public function getServicesByClient($id){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * 
+					FROM service 
+					JOIN client_service ON service.service_id = client_service.service_id 
+					JOIN client ON client_service.client_id = client.client_id 
+					WHERE client_id=:id");
+				$stmt->bindValue(':id', $id);
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Service');
+				while ($service = $stmt->fetch())
+				{
+					$responseRow["id"] = $service->getId(); 
+					$responseRow["name"] = $service->getName();
+					$responseRow["interestRate"] = $service->getInterestRate();
+					$responseRow["managerId"] = $service->getManagerId();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
+
+		public function getAllServices(){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * FROM service");
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Service');
+				while ($branch = $stmt->fetch())
+				{
+					$responseRow["id"] = $branch->getId(); 
+					$responseRow["name"] = $branch->getName();
+					$responseRow["interestRate"] = $branch->getInterestRate();
+					$responseRow["managerId"] = $branch->getManagerId();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
 			} catch (PDOException $e) {
 				echo($e->getMessage()); 
 			} finally {

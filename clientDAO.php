@@ -125,4 +125,65 @@
 				unset($pdo);
 			}
 		}
+
+		public function getClientsByBranch($id){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * FROM client WHERE branch_id=:id");
+				$stmt->bindValue(':id', $id);
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Client');
+				while ($client = $stmt->fetch())
+				{
+					$responseRow["id"] = $client->getId(); 
+					$responseRow["firstName"] = $client->getFirstName();
+					$responseRow["lastName"] = $client->getLastName();
+					$responseRow["email"] = $client->getEmail();
+					$responseRow["phone"] = $client->getPhone();
+					$responseRow["address"] = $client->getAddress();
+					$responseRow["birthDate"] = $client->getBirthDate();
+					$responseRow["joiningDate"] = $client->getJoiningDate();
+					$responseRow["category"] = $client->getCategory();
+					$responseRow["branchId"] = $client->getBranchId();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
+
+		public function getAllClients(){
+			try {
+				$pdo = new PDO($this->connectString, $this->user, $this->password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$stmt = $pdo->prepare("SELECT * FROM client");
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Client');
+				while ($client = $stmt->fetch())
+				{
+					$responseRow["id"] = $client->getId(); 
+					$responseRow["firstName"] = $client->getFirstName();
+					$responseRow["lastName"] = $client->getLastName();
+					$responseRow["email"] = $client->getEmail();
+					$responseRow["phone"] = $client->getPhone();
+					$responseRow["address"] = $client->getAddress();
+					$responseRow["birthDate"] = $client->getBirthDate();
+					$responseRow["joiningDate"] = $client->getJoiningDate();
+					$responseRow["category"] = $client->getCategory();
+					$responseRow["branchId"] = $client->getBranchId();
+					
+					$response[] = $responseRow;
+				}
+				return $response;
+			} catch (PDOException $e) {
+				echo($e->getMessage()); 
+			} finally {
+				unset($pdo);
+			}
+		}
 	}
