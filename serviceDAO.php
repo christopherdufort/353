@@ -21,11 +21,11 @@
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO service(service_name,interest_rate,manager_id,chargeId) 
-					VALUES(:service_name,:interestRate,:managerId);");
+				$stmt = $pdo->prepare("INSERT INTO service(service_name,service_interest,manager_id,charge_plan_id) 
+					VALUES(:name,:interestRate,:managerId,:chargeId);");
 
 				$stmt->bindValue(':name', $name);
-				$stmt->bindValue(':interestRate', $location);
+				$stmt->bindValue(':interestRate', $interestRate);
 				$stmt->bindValue(':managerId', $managerId);
 				$stmt->bindValue(':chargeId', $chargeId);
 				$stmt->execute();
@@ -45,7 +45,7 @@
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				$stmt = $pdo->prepare("UPDATE service 
-					SET service_name=:name, interest_rate=:interestRate, manager_id=:managerId, charge_plan_id=chargeId 
+					SET service_name=:name, service_interest=:interestRate, manager_id=:managerId, charge_plan_id=:chargeId 
 					WHERE service_id=:id");
 				
 				$stmt->bindValue(':id', $id);
@@ -91,9 +91,9 @@
 
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
-
-
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Service');
+
+				$response = [];
 
 				while ($service = $stmt->fetch())
 				{
@@ -121,10 +121,13 @@
 					FROM service 
 					JOIN client_service ON service.service_id = client_service.service_id 
 					JOIN client ON client_service.client_id = client.client_id 
-					WHERE client_id=:id");
+					WHERE client.client_id=:id");
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Service');
+				
+				$response = [];
+				
 				while ($service = $stmt->fetch())
 				{
 					$responseRow["id"] = $service->getId(); 
@@ -150,6 +153,9 @@
 				$stmt = $pdo->prepare("SELECT * FROM service");
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Service');
+				
+				$response = [];
+				
 				while ($branch = $stmt->fetch())
 				{
 					$responseRow["id"] = $branch->getId(); 

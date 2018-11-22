@@ -21,7 +21,7 @@
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO charge_plan(charge_name,charge,limit) VALUES(:name,:charge,:limit);");
+				$stmt = $pdo->prepare("INSERT INTO charge_plan(charge_name,charge,`limit`) VALUES(:name,:charge,:limit);");
 
 				$stmt->bindValue(':name', $name);
 				$stmt->bindValue(':charge', $charge);
@@ -43,7 +43,7 @@
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				$stmt = $pdo->prepare("UPDATE charge_plan 
-					SET charge_name=:name, charge=:charge, limit=:limit WHERE charge_id=:id");
+					SET charge_name=:name, charge=:charge, `limit`=:limit WHERE charge_id=:id");
 
 				$stmt->bindValue(':id', $id);
 				$stmt->bindValue(':name', $name);
@@ -91,6 +91,8 @@
 
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
 
+				$response = [];
+
 				while ($chargePlan = $stmt->fetch())
 				{
 				    $response["id"] = $chargePlan->getId(); 
@@ -119,6 +121,9 @@
 				$stmt->bindValue(':number', $number);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
+				
+				$response = [];
+
 				while ($chargePlan = $stmt->fetch())
 				{
 					$responseRow["id"] = $chargePlan->getId(); 
@@ -147,6 +152,9 @@
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
+				
+				$response = [];
+				
 				while ($chargePlan = $stmt->fetch())
 				{
 					$responseRow["id"] = $chargePlan->getId(); 
@@ -171,6 +179,9 @@
 				$stmt = $pdo->prepare("SELECT * FROM charge_plan");
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'ChargePlan');
+				
+				$response = [];
+				
 				while ($chargePlan = $stmt->fetch())
 				{
 					$responseRow["id"] = $chargePlan->getId(); 

@@ -17,14 +17,14 @@
 		}
 
 		public function createClient($firstName, $lastName, $email, $phone, $address, 
-			$birthDate, $joiningDate, $category){
+			$birthDate, $joiningDate, $category, $branchId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO client(first_name,last_name,email,phone,address
-					birth_date,joining_date,category) VALUES(:firstName,:lastName,:email,:phone,:address,
-					:birthDate,:joiningDate,:category);");
+				$stmt = $pdo->prepare("INSERT INTO client(first_name,last_name,email,phone,address, 
+					birth_date,joining_date,category,branch_id) VALUES(:firstName,:lastName,:email,:phone,:address,
+					:birthDate,:joiningDate,:category,:branchId);");
 
 				$stmt->bindValue(':firstName', $firstName);
 				$stmt->bindValue(':lastName', $lastName);
@@ -34,6 +34,7 @@
 				$stmt->bindValue(':birthDate', $birthDate);
 				$stmt->bindValue(':joiningDate', $joiningDate);
 				$stmt->bindValue(':category', $category);
+				$stmt->bindValue(':branchId', $branchId);
 				$stmt->execute();
 
 				return $pdo->lastInsertId();
@@ -46,7 +47,7 @@
 		}
 
 		public function updateClient($id, $firstName, $lastName, $email, $phone, 
-			$address, $birthDate, $joiningDate, $Category){
+			$address, $birthDate, $joiningDate, $category, $branchId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -54,9 +55,9 @@
 				$stmt = $pdo->prepare("UPDATE client 
 					SET first_name=:firstName, last_name=:lastName, 
 					email=:email, phone=:phone, address=:address, birth_date=:birthDate,
-					joining_date=:joiningDate, category:category WHERE client_id=:id");
+					joining_date=:joiningDate, category=:category, branch_id=:branchId WHERE client_id=:id");
 
-				$stmt->bindValue(':client_id', $id);
+				$stmt->bindValue(':id', $id);
 				$stmt->bindValue(':firstName', $firstName);
 				$stmt->bindValue(':lastName', $lastName);
 				$stmt->bindValue(':email', $email);
@@ -65,6 +66,7 @@
 				$stmt->bindValue(':birthDate', $birthDate);
 				$stmt->bindValue(':joiningDate', $joiningDate);
 				$stmt->bindValue(':category', $category);
+				$stmt->bindValue(':branchId', $branchId);
 				$stmt->execute();
 
 				return $stmt->rowCount();
@@ -103,9 +105,9 @@
 
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
-
-
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Client');
+
+				$response = [];
 
 				while ($client = $stmt->fetch())
 				{
@@ -117,7 +119,8 @@
 					$response["address"] = $client->getAddress();
 					$response["birthDate"] = $client->getBirthDate();
 				    $response["joiningDate"] = $client->getJoiningDate();
-				    $response["category"] = $client->getCategory();
+					$response["category"] = $client->getCategory();
+					$response["branchId"] = $client->getBranchId();
 				}
 
 				return $response;
@@ -137,6 +140,9 @@
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Client');
+				
+				$response = [];
+				
 				while ($client = $stmt->fetch())
 				{
 					$responseRow["id"] = $client->getId(); 
@@ -167,6 +173,9 @@
 				$stmt = $pdo->prepare("SELECT * FROM client");
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Client');
+				
+				$response = [];
+
 				while ($client = $stmt->fetch())
 				{
 					$responseRow["id"] = $client->getId(); 

@@ -41,7 +41,7 @@
 			}		
 		}
 
-		public function updateBranch($id, $name, $location, $limit){
+		public function updateBranch($id, $name, $location, $phone, $fax, $openingDate, $managerId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -50,6 +50,7 @@
 					SET branch_name=:name, location=:location, phone=:phone, fax=:fax, 
 					opening_date=:openingDate, manager_id=:managerId WHERE branch_id=:id");
 
+				$stmt->bindValue(':id', $id);
 				$stmt->bindValue(':name', $name);
 				$stmt->bindValue(':location', $location);
 				$stmt->bindValue(':phone', $phone);
@@ -90,13 +91,15 @@
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("SELECT * FROM branch WHERE charge_id=:id");
+				$stmt = $pdo->prepare("SELECT * FROM branch WHERE branch_id=:id");
 
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
 
 
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Branch');
+
+				$response = [];
 
 				while ($branch = $stmt->fetch())
 				{
@@ -125,8 +128,12 @@
 				$stmt = $pdo->prepare("SELECT * FROM branch");
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Branch');
+
+				$response = [];
+
 				while ($branch = $stmt->fetch())
 				{
+					$reponseRow = [];
 					$responseRow["id"] = $branch->getId(); 
 					$responseRow["name"] = $branch->getName();
 					$responseRow["location"] = $branch->getLocation();

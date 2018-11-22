@@ -16,12 +16,12 @@
 			$this->password = "";
 		}
 
-		public function createAccount($type, $balance, $option, $chargeId, $interest){
+		public function createAccount($type, $balance, $chargeId, $interest){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,chargeId,interest) 
+				$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,charge_plan_id,account_interest) 
 					VALUES(:type,:balance,:chargeId,:interest);");
 
 				$stmt->bindValue(':type', $type);
@@ -45,7 +45,7 @@
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				$stmt = $pdo->prepare("UPDATE account 
-					SET account_type=:type, balance=:balance, chargeId=:chargeId, account_interest=:interest, 
+					SET account_type=:type, balance=:balance, charge_plan_id=:chargeId, account_interest=:interest 
 					WHERE account_number=:number");
 
 				$stmt->bindValue(':number', $number);
@@ -91,9 +91,9 @@
 
 				$stmt->bindValue(':number', $number);
 				$stmt->execute();
-
-
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Account');
+
+				$response = [];
 
 				while ($account = $stmt->fetch())
 				{
@@ -121,7 +121,7 @@
 					FROM account 
 					JOIN client_account ON client_account.account_number = account.account_number 
 					JOIN client ON client_account.client_id = client.client_id 
-					WHERE client_id=:id");
+					WHERE client.client_id=:id");
 				$stmt->bindValue(':id', $id);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Account');
@@ -151,11 +151,14 @@
 					FROM account 
 					JOIN client_account ON client_account.account_number = account.account_number 
 					JOIN client ON client_account.client_id = client.client_id 
-					WHERE client_id=:id AND account_type=:type");
+					WHERE client.client_id=:id AND account_type=:type");
 				$stmt->bindValue(':id', $id);
 				$stmt->bindValue(':type', $type);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Account');
+
+				$response = [];
+				
 				while ($account = $stmt->fetch())
 				{
 					$responseRow["number"] = $account->getNumber(); 
@@ -251,6 +254,9 @@
 				$stmt = $pdo->prepare("SELECT * FROM account");
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Account');
+				
+				$response = [];
+
 				while ($account = $stmt->fetch())
 				{
 					$responseRow["number"] = $account->getNumber(); 

@@ -17,14 +17,14 @@
 		}
 
 		public function createEmployee($title, $firstName, $lastName, $email, $phone, $address, 
-			$type, $salary, $startDate){
+			$type, $salary, $startDate, $branchId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO employee(title,first_name,last_name,email,phone,address
-					employee_type,salary,start_date) VALUES(:title,:firstName,:lastName,:email,:phone,:address,
-					:type,:salary,:startDate);");
+				$stmt = $pdo->prepare("INSERT INTO employee(title,first_name,last_name,email,phone,address, 
+					employee_type,salary,start_date,branch_id) VALUES(:title,:firstName,:lastName,:email,:phone,:address,
+					:type,:salary,:startDate,:branchId);");
 
 				$stmt->bindValue(':title', $title);
 				$stmt->bindValue(':firstName', $firstName);
@@ -35,6 +35,7 @@
 				$stmt->bindValue(':type', $type);
 				$stmt->bindValue(':salary', $salary);
 				$stmt->bindValue(':startDate', $startDate);
+				$stmt->bindValue(':branchId', $branchId);
 				$stmt->execute();
 
 				return $pdo->lastInsertId();
@@ -47,7 +48,7 @@
 		}
 
 		public function updateEmployee($id, $title, $firstName, $lastName, $email, $phone, 
-			$address, $type, $salary, $startDate){
+			$address, $type, $salary, $startDate, $branchId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -55,7 +56,7 @@
 				$stmt = $pdo->prepare("UPDATE employee 
 					SET title=:title, first_name=:firstName, last_name=:lastName, 
 					email=:email, phone=:phone, address=:address, employee_type=:type,
-					salary=:salary, start_date:startDate WHERE employee_id=:id");
+					salary=:salary, start_date=:startDate, branch_id=:branchId WHERE employee_id=:id");
 
 				$stmt->bindValue(':id', $id);
 				$stmt->bindValue(':title', $title);
@@ -67,8 +68,9 @@
 				$stmt->bindValue(':type', $type);
 				$stmt->bindValue(':salary', $salary);
 				$stmt->bindValue(':startDate', $startDate);
+				$stmt->bindValue(':branchId', $branchId);
 				$stmt->execute();
-
+				
 				return $stmt->rowCount();
 
 			} catch (PDOException $e) {
@@ -108,6 +110,8 @@
 
 
 				$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Employee');
+
+				$response = [];
 
 				while ($employee = $stmt->fetch())
 				{
