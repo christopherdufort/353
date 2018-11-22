@@ -1,51 +1,53 @@
 <?php
 	class Client {
 
-		private $id;
-		private $firstName;
-		private $lastName;
+		private $client_id;
+		private $first_name;
+		private $last_name;
 		private $email;
 		private $phone;
 		private $address;
-		private $birthDate;
-		private $joiningDate;
+		private $birth_date;
+		private $joining_date;
 		private $category;
+		private $branch_id;
 
-		function __construct($id=0, $firstName="", $lastName="", $email="", $phone="", 
-			$address="", $birthDate="", $joiningDate="", $category="") {
-			$this->setId($id);
-			$this->setFirstName($firstName);
-			$this->setLastName($lastName);
+		function __construct($client_id=0, $first_name="", $last_name="", $email="", $phone="", 
+			$address="", $birth_date="", $joining_date="", $category="", $branch_id=0) {
+			$this->setId($client_id);
+			$this->setFirstName($first_name);
+			$this->setLastName($last_name);
 			$this->setEmail($email);
 			$this->setPhone($phone);
 			$this->setAddress($address);
-			$this->setBirthDate($birthDate);
-			$this->setJoiningDate($joiningDate);
+			$this->setBirthDate($birth_date);
+			$this->setJoiningDate($joining_date);
 			$this->setCategory($category);
+			$this->setBranchId($branch_id);
 		}
 
 		public function getId(){
-			return $this->id;
+			return $this->client_id;
 		}
 
-		public function setId($id){
-			$this->id = $id;
+		public function setId($client_id){
+			$this->client_id = $client_id;
 		}
 
 		public function getFirstName(){
-			return $this->firstName;
+			return $this->first_name;
 		}
 
-		public function setFirstName($firstName){
-			$this->firstName = $firstName;
+		public function setFirstName($first_name){
+			$this->first_name = $first_name;
 		}
 
 		public function getLastName(){
-			return $this->lastName;
+			return $this->last_name;
 		}
 
-		public function setLastName($lastName){
-			$this->lastName = $lastName;
+		public function setLastName($last_name){
+			$this->last_name = $last_name;
 		}
 
 		public function getEmail(){
@@ -73,19 +75,19 @@
 		}
 
 		public function getBirthDate(){
-			return $this->birthDate;
+			return $this->birth_date;
 		}
 
-		public function setBirthDate($birthDate){
-			$this->birthDate = $birthDate;
+		public function setBirthDate($birth_date){
+			$this->birth_date = $birth_date;
 		}
 
 		public function getJoiningDate(){
-			return $this->joiningDate;
+			return $this->joining_date;
 		}
 
-		public function setJoiningDate($joiningDate){
-			$this->joiningDate = $joiningDate;
+		public function setJoiningDate($joining_date){
+			$this->joining_date = $joining_date;
 		}
 
 		public function getCategory(){
@@ -96,15 +98,24 @@
 			$this->category = $category;
 		}
 
+		public function getBranchId(){
+			return $this->branch_id;
+		}
+
+		public function setBranchId($branch_id){
+			$this->branch_id = $branch_id;
+		}
+
 		public function __toString(){
-			return "id: $this->id <br/>
-					firstName: $this->firstName <br/>
+			return "client_id: $this->client_id <br/>
+					first_name: $this->first_name <br/>
 					lastName: $this->lastName <br/>
 					email: $this->email <br/>
 					phone: $this->phone <br/>
 					address: $this->address <br/>
 					birthDate: $this->birthDate <br/>
 					joiningDate: $this->joiningDate <br/>
-					category: $this->category";
+					category: $this->category <br/>
+					branchclient_id: $this->branchclient_id";
         }
 	}

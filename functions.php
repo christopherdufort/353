@@ -2,7 +2,7 @@
 
     session_start();
 
-    $link = mysqli_connect("localhost", "---", "---", "---");
+    #$link = mysqli_connect("localhost", "---", "---", "---");
 
     #if (mysqli_connect_errno()) {
         

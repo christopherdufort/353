@@ -1,38 +1,38 @@
 <?php
 	class Branch {
 
-		private $id;
-		private $name;
+		private $branch_id;
+		private $branch_name;
 		private $location;
 		private $phone;
 		private $fax;
-		private $openingDate;
-		private $managerId;
+		private $opening_date;
+		private $manager_id;
 
-		function __construct($id=0, $name="", $locations="", $phone="", $fax="", $openingDate="", $managerId=0) {
-			$this->setId($id);
-			$this->setName($name);
+		function __construct($branch_id=0, $branch_name="", $location="", $phone="", $fax="", $opening_date="", $manager_id=0) {
+			$this->setId($branch_id);
+			$this->setName($branch_name);
 			$this->setLocation($location);
 			$this->setPhone($phone);
 			$this->setFax($fax);
-			$this->setOpeningDate($openingDate);
-			$this->setManagerId($managerId);
+			$this->setOpeningDate($opening_date);
+			$this->setManagerId($manager_id);
 		}
 
 		public function getId(){
-			return $this->id;
+			return $this->branch_id;
 		}
 
-		public function setId($id){
-			$this->id = $id;
+		public function setId($branch_id){
+			$this->branch_id = $branch_id;
 		}
 
 		public function getName(){
-			return $this->name;
+			return $this->branch_name;
 		}
 
-		public function setName($name){
-			$this->name = $name;
+		public function setName($branch_name){
+			$this->branch_name = $branch_name;
 		}
 
 		public function getLocation(){
@@ -60,28 +60,28 @@
 		}
 
 		public function getOpeningDate(){
-			return $this->openingDate;
+			return $this->opening_date;
 		}
 
-		public function setOpeningDate($openingDate){
-			$this->openingDate = $openingDate;
+		public function setOpeningDate($opening_date){
+			$this->opening_date = $opening_date;
 		}
 
 		public function getManagerId(){
-			return $this->managerId;
+			return $this->manager_id;
 		}
 
-		public function setManagerId($managerId){
-			$this->managerId = $managerId;
+		public function setManagerId($manager_id){
+			$this->manager_id = $manager_id;
 		}
 
 		public function __toString(){
-        	return "id: $this->id <br/>
-					name: $this->name <br/>
-					location: $this->location <br/>
+        	return "id: $this->branch_id <br/>
+					name: $this->branch_name <br/>
+					location: $this->opening_date <br/>
 					phone: $this->phone <br/>
 					fax: $this->fax <br/>
 					openingDate: $this->openingDate <br/>
-					managerId: $this->managerId";
+					managerId: $this->manager_id";
         }
 	}

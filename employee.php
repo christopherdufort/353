@@ -1,37 +1,39 @@
 <?php
 	class Employee {
 
-		private $id;
+		private $employee_id;
 		private $title;
-		private $firstName;
-		private $lastName;
+		private $first_name;
+		private $last_name;
 		private $email;
 		private $phone;
 		private $address;
-		private $type;
+		private $employee_type;
 		private $salary;
-		private $startDate;
+		private $start_date;
+		private $branch_id;
 
-		function __construct($id=0, $title="", $firstName="", $lastName="", $email="", $phone="", 
-			$address="", $type="", $salary=0.0, $startDate="") {
-			$this->setId($id);
+		function __construct($employee_id=0, $title="", $first_name="", $last_name="", $email="", $phone="", 
+			$address="", $employee_type="", $salary=0.0, $start_date="", $branch_id=0) {
+			$this->setId($employee_id);
 			$this->setTitle($title);
-			$this->setFirstName($firstName);
-			$this->setLastName($lastName);
+			$this->setFirstName($first_name);
+			$this->setLastName($last_name);
 			$this->setEmail($email);
 			$this->setPhone($phone);
 			$this->setAddress($address);
-			$this->setType($type);
+			$this->setType($employee_type);
 			$this->setSalary($salary);
-			$this->setStartDate($startDate);
+			$this->setStartDate($start_date);
+			$this->setBranchId($branch_id);
 		}
 
 		public function getId(){
-			return $this->id;
+			return $this->employee_id;
 		}
 
-		public function setId($id){
-			$this->id = $id;
+		public function setId($employee_id){
+			$this->employee_id = $employee_id;
 		}
 
 		public function getTitle(){
@@ -43,19 +45,19 @@
 		}
 
 		public function getFirstName(){
-			return $this->firstName;
+			return $this->first_name;
 		}
 
-		public function setFirstName($firstName){
-			$this->firstName = $firstName;
+		public function setFirstName($first_name){
+			$this->first_name = $first_name;
 		}
 
 		public function getLastName(){
-			return $this->lastName;
+			return $this->last_name;
 		}
 
-		public function setLastName($lastName){
-			$this->lastName = $lastName;
+		public function setLastName($last_name){
+			$this->last_name = $last_name;
 		}
 
 		public function getEmail(){
@@ -83,11 +85,11 @@
 		}
 
 		public function getType(){
-			return $this->type;
+			return $this->employee_type;
 		}
 
-		public function setType($type){
-			$this->type = $type;
+		public function setType($employee_type){
+			$this->employee_type = $employee_type;
 		}
 
 		public function getSalary(){
@@ -99,23 +101,32 @@
 		}
 
 		public function getStartDate(){
-			return $this->startDate;
+			return $this->start_date;
 		}
 
-		public function setStartDate($startDate){
-			$this->startDate = $startDate;
+		public function setStartDate($start_date){
+			$this->start_date = $start_date;
+		}
+
+		public function getBranchId(){
+			return $this->branch_id;
+		}
+
+		public function setBranchId($branch_id){
+			$this->branch_id = $branch_id;
 		}
 
 		public function __toString(){
-			return "id: $this->id <br/>
+			return "id: $this->employee_id <br/>
 					title: $this->title <br/>
-					firstName: $this->firstName <br/>
-					lastName: $this->lastName <br/>
+					firstName: $this->first_name <br/>
+					lastName: $this->last_name <br/>
 					email: $this->email <br/>
 					phone: $this->phone <br/>
 					address: $this->address <br/>
 					type: $this->type <br/>
 					salary: $this->salary <br/>
-					startDate: $this->startDate";
+					branchId: $this->branch_id <br/>
+					startDate: $this->start_date";
         }
 	}

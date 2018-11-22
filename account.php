@@ -1,34 +1,34 @@
 <?php
 	class Account {
 
-		private $number;
-		private $type;
+		private $account_number;
+		private $account_type;
 		private $balance;
-		private $option;
-		private $interest;
+		private $charge_plan_id;
+		private $account_interest;
 
-		function __construct($number=0, $type="", $balance=0.0, $option="", $fax="", $interest=0.0) {
-			$this->setNumber($number);
-			$this->setType($type);
+		function __construct($account_number=0, $account_type="", $balance=0.0, $charge_plan_id=0, $account_interest=0.0) {
+			$this->setNumber($account_number);
+			$this->setType($account_type);
 			$this->setBalance($balance);
-			$this->setOption($option);
-			$this->setInterest($interest);
+			$this->setChargeId($charge_plan_id);
+			$this->setInterest($account_interest);
 		}
 
 		public function getNumber(){
-			return $this->number;
+			return $this->account_number;
 		}
 
-		public function setNumber($number){
-			$this->number = $number;
+		public function setNumber($account_number){
+			$this->account_number = $account_number;
 		}
 
 		public function getType(){
-			return $this->type;
+			return $this->account_type;
 		}
 
-		public function setType($type){
-			$this->type = $type;
+		public function setType($account_type){
+			$this->account_type = $account_type;
 		}
 
 		public function getBalance(){
@@ -39,27 +39,27 @@
 			$this->balance = $balance;
 		}
 
-		public function getOption(){
-			return $this->option;
+		public function getChargeId(){
+			return $this->charge_plan_id;
 		}
 
-		public function setOption($option){
-			$this->option = $option;
+		public function setChargeId($charge_plan_id){
+			$this->charge_plan_id = $charge_plan_id;
 		}
 
 		public function getInterest(){
-			return $this->interest;
+			return $this->account_interest;
 		}
 
-		public function setInterest($interest){
-			$this->interest = $interest;
+		public function setInterest($account_interest){
+			$this->account_interest = $account_interest;
 		}
 
 		public function __toString(){
-        	return "number: $this->number <br/>
-					type: $this->type <br/>
+        	return "number: $this->account_number <br/>
+					type: $this->account_type <br/>
 					balance: $this->balance <br/>
-					option: $this->option <br/>
-					interest: $this->interest";
+					chargeId: $this->charge_plan_id <br/>
+					interest: $this->account_interest";
         }
 	}

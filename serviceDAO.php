@@ -11,19 +11,23 @@
 			$this->connectString ="mysql:host=gec353.encs.concordia.ca;dbname=gec353_2;charset=utf8mb4";
 			$this->user = "gec353_2";
 			$this->password = "W5T7N3C9";
+			$this->connectString ="mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
+			$this->user = "root";
+			$this->password = "";
 		}
 
-		public function createService($name, $interestRate, $managerId){
+		public function createService($name, $interestRate, $managerId, $chargeId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO service(service_name,interest_rate,manager_id) 
+				$stmt = $pdo->prepare("INSERT INTO service(service_name,interest_rate,manager_id,chargeId) 
 					VALUES(:service_name,:interestRate,:managerId);");
 
 				$stmt->bindValue(':name', $name);
 				$stmt->bindValue(':interestRate', $location);
 				$stmt->bindValue(':managerId', $managerId);
+				$stmt->bindValue(':chargeId', $chargeId);
 				$stmt->execute();
 
 				return $pdo->lastInsertId();
@@ -35,19 +39,20 @@
 			}		
 		}
 
-		public function updateService($id, $name, $interestRate, $managerId){
+		public function updateService($id, $name, $interestRate, $managerId, $chargeId){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				$stmt = $pdo->prepare("UPDATE service 
-					SET service_name=:name, interest_rate=:interestRate, manager_id=:managerId  
+					SET service_name=:name, interest_rate=:interestRate, manager_id=:managerId, charge_plan_id=chargeId 
 					WHERE service_id=:id");
 				
 				$stmt->bindValue(':id', $id);
 				$stmt->bindValue(':name', $name);
 				$stmt->bindValue(':interestRate', $interestRate);
 				$stmt->bindValue(':managerId', $managerId);
+				$stmt->bindValue(':chargeId', $chargeId);
 				$stmt->execute();
 
 				return $stmt->rowCount();
@@ -95,7 +100,8 @@
 				    $response["id"] = $service->getId(); 
 				    $response["name"] = $service->getName();
 				    $response["interestRate"] = $service->getInterestRate();
-				    $response["managerId"] = $service->getManagerId();
+					$response["managerId"] = $service->getManagerId();
+					$response["chargeId"] = $service->getChargeId();
 				}
 
 				return $response;
@@ -125,6 +131,7 @@
 					$responseRow["name"] = $service->getName();
 					$responseRow["interestRate"] = $service->getInterestRate();
 					$responseRow["managerId"] = $service->getManagerId();
+					$responseRow["chargeId"] = $service->getChargeId();
 					
 					$response[] = $responseRow;
 				}
@@ -149,6 +156,7 @@
 					$responseRow["name"] = $branch->getName();
 					$responseRow["interestRate"] = $branch->getInterestRate();
 					$responseRow["managerId"] = $branch->getManagerId();
+					$responseRow["chargeId"] = $branch->getChargeId();
 					
 					$response[] = $responseRow;
 				}

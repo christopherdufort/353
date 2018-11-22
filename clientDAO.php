@@ -11,6 +11,9 @@
 			$this->connectString ="mysql:host=gec353.encs.concordia.ca;dbname=gec353_2;charset=utf8mb4";
 			$this->user = "gec353_2";
 			$this->password = "W5T7N3C9";
+			$this->connectString ="mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
+			$this->user = "root";
+			$this->password = "";
 		}
 
 		public function createClient($firstName, $lastName, $email, $phone, $address, 
@@ -167,7 +170,7 @@
 				while ($client = $stmt->fetch())
 				{
 					$responseRow["id"] = $client->getId(); 
-					$responseRow["firstName"] = $client->getFirstName();
+					$responseRow["first_name"] = $client->getFirstName();
 					$responseRow["lastName"] = $client->getLastName();
 					$responseRow["email"] = $client->getEmail();
 					$responseRow["phone"] = $client->getPhone();

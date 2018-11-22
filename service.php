@@ -1,54 +1,65 @@
 <?php
 	class Service {
 
-		private $id;
-		private $name;
-		private $interestRate;
-		private $managerId;
+		private $service_id;
+		private $service_name;
+		private $service_interest;
+		private $manager_id;
+		private $charge_plan_id;
 
-		function __construct($id=0, $name="", $interestRate=0.0, $managerId=0) {
-			$this->setId($id);
-			$this->setName($name);
-			$this->setInterestRate($interestRate);
-			$this->setManagerId($managerId);
+		function __construct($service_id=0, $service_name="", $service_interest=0.0, $manager_id=0, $charge_plan_id=0) {
+			$this->setId($service_id);
+			$this->setName($service_name);
+			$this->setInterestRate($service_interest);
+			$this->setManagerId($manager_id);
+			$this->setChargeId($charge_plan_id);
 		}
 
 		public function getId(){
-			return $this->id;
+			return $this->service_id;
 		}
 
-		public function setId($id){
-			$this->id = $id;
+		public function setId($service_id){
+			$this->service_id = $service_id;
 		}
 
 		public function getName(){
-			return $this->name;
+			return $this->service_name;
 		}
 
-		public function setName($name){
-			$this->name = $name;
+		public function setName($service_name){
+			$this->service_name = $service_name;
 		}
 
 		public function getInterestRate(){
-			return $this->interestRate;
+			return $this->service_interest;
 		}
 
-		public function setInterestRate($interestRate){
-			$this->interestRate = $interestRate;
+		public function setInterestRate($service_interest){
+			$this->service_interest = $service_interest;
 		}
 
 		public function getManagerId(){
-			return $this->managerId;
+			return $this->manager_id;
 		}
 
-		public function setManagerId($managerId){
-			$this->managerId = $managerId;
+		public function setManagerId($manager_id){
+			$this->manager_id = $manager_id;
+		}
+
+		public function getChargeId(){
+			return $this->charge_plan_id;
+		}
+
+		public function setChargeId($charge_plan_id){
+			$this->charge_plan_id = $charge_plan_id;
 		}
 
 		public function __toString(){
-        	return "id: $this->id <br/>
-					name: $this->name <br/>
-					interestRate: $this->interestRate <br/>
+        	return "id: $this->service_id <br/>
+					name: $this->service_name <br/>
+					interestRate: $this->service_interest <br/>
+					chargeId: $this->charge_plan_id <br/>
 					managerId: $this->managerId";
         }
 	}

@@ -11,19 +11,22 @@
 			$this->connectString ="mysql:host=gec353.encs.concordia.ca;dbname=gec353_2;charset=utf8mb4";
 			$this->user = "gec353_2";
 			$this->password = "W5T7N3C9";
+			$this->connectString ="mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
+			$this->user = "root";
+			$this->password = "";
 		}
 
-		public function createAccount($type, $balance, $option, $interest){
+		public function createAccount($type, $balance, $option, $chargeId, $interest){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,option,interest) 
-					VALUES(:type,:balance,:option,:interest);");
+				$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,chargeId,interest) 
+					VALUES(:type,:balance,:chargeId,:interest);");
 
 				$stmt->bindValue(':type', $type);
 				$stmt->bindValue(':balance', $balance);
-				$stmt->bindValue(':option', $option);
+				$stmt->bindValue(':chargeId', $chargeId);
 				$stmt->bindValue(':interest', $interest);
 				$stmt->execute();
 
@@ -36,19 +39,19 @@
 			}		
 		}
 
-		public function updateAccount($number, $name, $location, $limit){
+		public function updateAccount($number, $type, $balance, $chargeId, $interest){
 			try {
 				$pdo = new PDO($this->connectString, $this->user, $this->password);
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 				$stmt = $pdo->prepare("UPDATE account 
-					SET account_type=:type, balance=:balance, option=:option, account_interest=:interest, 
+					SET account_type=:type, balance=:balance, chargeId=:chargeId, account_interest=:interest, 
 					WHERE account_number=:number");
 
 				$stmt->bindValue(':number', $number);
 				$stmt->bindValue(':type', $type);
 				$stmt->bindValue(':balance', $balance);
-				$stmt->bindValue(':option', $option);
+				$stmt->bindValue(':chargeId', $chargeId);
 				$stmt->bindValue(':interest', $interest);
 				$stmt->execute();
 
@@ -97,7 +100,7 @@
 				    $response["number"] = $account->getNumber(); 
 				    $response["type"] = $account->getType();
 				    $response["balance"] = $account->getBalance();
-					$response["option"] = $account->getOption();
+					$response["chargeId"] = $account->getChargeId();
 					$response["interest"] = $account->getInterest();
 				}
 
@@ -127,7 +130,7 @@
 					$responseRow["number"] = $account->getNumber(); 
 					$responseRow["type"] = $account->getType();
 					$responseRow["balance"] = $account->getBalance();
-					$responseRow["option"] = $account->getOption();
+					$responseRow["chargeId"] = $account->getChargeId();
 					$responseRow["interest"] = $account->getInterest();
 					
 					$response[] = $responseRow;
@@ -158,7 +161,7 @@
 					$responseRow["number"] = $account->getNumber(); 
 					$responseRow["type"] = $account->getType();
 					$responseRow["balance"] = $account->getBalance();
-					$responseRow["option"] = $account->getOption();
+					$responseRow["chargeId"] = $account->getChargeId();
 					$responseRow["interest"] = $account->getInterest();
 					
 					$response[] = $responseRow;
@@ -253,7 +256,7 @@
 					$responseRow["number"] = $account->getNumber(); 
 					$responseRow["type"] = $account->getType();
 					$responseRow["balance"] = $account->getBalance();
-					$responseRow["option"] = $account->getOption();
+					$responseRow["chargeId"] = $account->getChargeId();
 					$responseRow["interest"] = $account->getInterest();
 					
 					$response[] = $responseRow;
