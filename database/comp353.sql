@@ -172,3 +172,15 @@ CREATE TABLE `client_account` (
   `account_number` int(11) NOT NULL,
   PRIMARY KEY (`client_id`,`account_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for transactions
+--
+
+CREATE TABLE `transactions`(
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_account` int(11) NOT NULL,
+  `to_account` int(11) NOT NULL,
+  `transaction_date` date NOT NULL,
+  PRIMARY KEY (`transaction_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
