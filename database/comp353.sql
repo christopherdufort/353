@@ -90,7 +90,6 @@ CREATE TABLE `client` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`client_id`),
   FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branch_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -113,6 +112,7 @@ CREATE TABLE `charge_plan` (
 --
 
 CREATE TABLE `login` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `card_number` int(11) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `is_employee` tinyint(1) DEFAULT NULL,
@@ -158,6 +158,7 @@ CREATE TABLE `account` (
   `account_interest` decimal(5,2) DEFAULT NULL,
   `balance` decimal(11,2) DEFAULT NULL,
   `charge_plan_id` int(11) DEFAULT NULL,
+  `account_category` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`account_number`),
   FOREIGN KEY (`charge_plan_id`) REFERENCES `charge_plan` (`charge_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
