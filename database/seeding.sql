@@ -97,7 +97,8 @@ UNLOCK TABLES;
 --
 LOCK TABLES `login` WRITE;
 INSERT INTO `login` VALUES (1, 1234567890, "password", 1, 1),
-							(2, 0987654321, "password", 0, 1);
+							(2, 0987654321, "password", 0, 1),
+							(3, 01123456789, "password", 0, 4);
 UNLOCK TABLES;
 
 --

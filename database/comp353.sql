@@ -182,7 +182,8 @@ CREATE TABLE `client_account` (
 CREATE TABLE `transactions`(
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `from_account` int(11) NOT NULL,
-  `to_account` int(11) NOT NULL,
+  `to_account` int(11) DEFAULT NULL,
+  `to_service` int(11) DEFAULT NULL,
   `amount` decimal(11,2) NOT NULL,
   `transaction_date` date NOT NULL,
   PRIMARY KEY (`transaction_id`)
