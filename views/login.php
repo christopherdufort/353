@@ -1,15 +1,24 @@
-<main role="main" class="container my-5">
-    <form class="form-signin">
-        <h1 class="h3 mb-3 font-weight-normal"> Please login </h1>
-        <label for="inputEmail" class="sr-only"> Email address </label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"> Login </button>
+<main role="main" class="container my-2">
+<?php
+if (isset($_SESSION['message'])) {
+	echo "<div class=\"alert alert-danger\" role=\"alert\">";
+	echo $_SESSION['message'];
+	echo "</div>";
+	unset($_SESSION['message']);
+}
+?>
+
+
+    <form class="form-signin" action="actions.php" method="post">
+        <h1 class="h3 mb-3 font-weight-normal text-center"> Login </h1>
+
+        <label for="inputid" name="id" class="sr-only"> Client Card Number </label>
+        <input type="text" id="inputid" name="id" class="form-control" placeholder="Client Card Number" required autofocus>
+    </br>
+        <label for="inputPassword" name="password" class="sr-only"> Password </label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+ </br>
+        <button class="btn btn-lg btn-info btn-block" type="submit" name="login" value="Login"> Login </button>
     </form>
+
 </main>

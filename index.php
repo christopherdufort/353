@@ -1,22 +1,24 @@
 <?php
 
-    include("functions.php");
+#error_reporting(E_ALL);
+#sini_set('display_errors', 1);
 
-    include("views/header.php");
+include "functions.php";
+include "views/header.php";
 
-    # Redirect to different pages in views/
-    if ($_GET['page'] == 'accounts') {
-        
-        include("views/accounts.php");
-        
-    } else if ($_GET['page'] == 'login') {
-        
-        include("views/login.php");
-        
-    } else {
-
-        include("views/home.php");
-        
-    }
+# Redirect to different pages in views/
+if ($_GET['page'] == 'accounts') {
+	include "views/accounts.php";
+} else if ($_GET['page'] == 'login') {
+	include "views/login.php";
+} else if ($_GET['page'] == 'bills') {
+	include "views/pay_bills.php";
+} else if ($_GET['page'] == 'client_page') {
+	include "views/client_page.php";
+} else if ($_GET['page'] == 'sendmoney') {
+	include "views/sendmoney.php";
+} else {
+	include "views/home.php";
+}
 
 ?>

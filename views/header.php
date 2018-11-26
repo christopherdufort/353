@@ -6,44 +6,54 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
-        <title> Home - COMP 353 </title>
+        <title> 353 </title>
         <!-- Bootstrap core CSS -->
         <link href="./static/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="./static/css/mystyle.css" rel="stylesheet">
         <link href="./static/css/fontawesome-all.css" rel="stylesheet">
     </head>
-    
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="."> COMP 353 </a>
+            <a class="navbar-brand" href="."> 353 Banking </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
+                    <?php if ($_SESSION['is_logged']) {?>
                     <li class="nav-item">
                         <a class="nav-link" href="?page=accounts"> My Accounts </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=bills"> Pay Bills </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=sendmoney"> Send Money </a>
+                    </li>
+                    <?php }?>
                 </ul>
                 <div class="form-inline pull-xs-right">
-                    
-                    <?php if ($_SESSION['id']) { ?>
-                    
-                    <a class="btn btn-success-outline" href="?function=logout"> Logout </a>
-                    
-                    <?php } else { ?>
-                    
+                    <?php if ($_SESSION['is_logged']) {?>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item px-4">
+                            <a class="nav-link" href="?page=client_page"> <?php echo $_SESSION['client']['firstName'] . ' ' . $_SESSION['client']['lastName']; ?> <i class="far fa-user-circle"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-signin" action="actions.php" method="post">
+                                <button class="btn btn-success-outline" type="submit" name="logout" value="logout"> Logout </button>
+                            </form>
+                        </li>
+                    </ul>
+                    <?php } else {?>
                     <a class="nav-lin" href="?page=login">
-                    <button class="btn btn-success-outline" data-toggle="modal" data-target="#myModal"> Login </button>
-                </a>
-                    
-                    <?php } ?>
-
+                        <button class="btn btn-success-outline" data-toggle="modal" data-target="#myModal"> Login </button>
+                    </a>
+                    <?php }?>
                 </div>
             </div>
         </nav>
-        
         <!-- /.container -->
         <!-- Bootstrap core JavaScript
         ================================================== -->
