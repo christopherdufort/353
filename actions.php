@@ -2,11 +2,11 @@
 
 include "functions.php";
 include 'classes/client/clientDAO.php';
-$db = new ClientDAO();
+include 'classes/account/accountDAO.php';
 
 # Login
 if (isset($_POST['login'])) {
-
+	$db = new ClientDAO();
 	$client = $db->getClient($_POST['id']);
 	if (!$client) {
 		$_SESSION['message'] = 'Wrong account id or password!';
@@ -36,6 +36,14 @@ if (isset($_POST['logout'])) {
 	exit;
 }
 
-# Send Money
+# Transfer money between accounts
+if (isset($_POST['transfer'])) {
+
+	$db = new AccountDAO();
+	$client = $db->transferMoney($_POST['from'], $_POST['to'], $_POST['amount']);
+	header("Location: index.php?page=accounts");
+	exit;
+
+}
 
 ?>

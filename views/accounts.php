@@ -1,12 +1,11 @@
 <main role="main" class="container my-5">
     <h1> Transfer Money </h1>
-</br>
-    <form class="form-inline">
-        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="From">
-        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="To">
-        </div>
-        <button type="submit" class="btn btn-primary">Transfer</button>
+    </br>
+    <form class="form-inline" action="actions.php" method="post">
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="From" name="from">
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="To" name="to">
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="account">
+        <button type="submit" class="btn btn-primary" name="transfer">Transfer</button>
     </form>
     </br>
     <h1> My Accounts </h1>

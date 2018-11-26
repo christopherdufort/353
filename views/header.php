@@ -47,9 +47,9 @@
                         </li>
                     </ul>
                     <?php } else {?>
-                    <a class="nav-lin" href="?page=login">
-                        <button class="btn btn-success-outline" data-toggle="modal" data-target="#myModal"> Login </button>
-                    </a>
+                    <form class="form-signin" action="actions.php" method="post">
+                        <button class="btn btn-success-outline" type="submit" name="login" value="login"> Login </button>
+                    </form>
                     <?php }?>
                 </div>
             </div>
