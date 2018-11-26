@@ -18,18 +18,19 @@ class AccountDAO {
 		$this->password = "W5T7N3C9";
 	}
 
-	public function createAccount($type, $balance, $chargeId, $interest) {
+	public function createAccount($type, $balance, $chargeId, $interest, $category) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,charge_plan_id,account_interest)
-					VALUES(:type,:balance,:chargeId,:interest);");
+			$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,charge_plan_id,account_interest,account_category)
+					VALUES(:type,:balance,:chargeId,:interest,:category);");
 
 			$stmt->bindValue(':type', $type);
 			$stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':chargeId', $chargeId);
 			$stmt->bindValue(':interest', $interest);
+			$stmt->bindValue(':category', $category);
 			$stmt->execute();
 
 			return $pdo->lastInsertId();
@@ -41,13 +42,13 @@ class AccountDAO {
 		}
 	}
 
-	public function updateAccount($number, $type, $balance, $chargeId, $interest) {
+	public function updateAccount($number, $type, $balance, $chargeId, $interest, $category) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			$stmt = $pdo->prepare("UPDATE account
-					SET account_type=:type, balance=:balance, charge_plan_id=:chargeId, account_interest=:interest
+					SET account_type=:type, balance=:balance, charge_plan_id=:chargeId, account_interest=:interest, account_category=:category
 					WHERE account_number=:number");
 
 			$stmt->bindValue(':number', $number);
@@ -55,6 +56,7 @@ class AccountDAO {
 			$stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':chargeId', $chargeId);
 			$stmt->bindValue(':interest', $interest);
+			$stmt->bindValue(':category', $category);
 			$stmt->execute();
 
 			return $stmt->rowCount();
@@ -103,6 +105,7 @@ class AccountDAO {
 				$response["balance"] = $account->getBalance();
 				$response["chargeId"] = $account->getChargeId();
 				$response["interest"] = $account->getInterest();
+				$response["category"] = $account->getCategory();
 			}
 
 			return $response;
@@ -132,6 +135,7 @@ class AccountDAO {
 				$responseRow["balance"] = $account->getBalance();
 				$responseRow["chargeId"] = $account->getChargeId();
 				$responseRow["interest"] = $account->getInterest();
+				$responseRow["category"] = $account->getCategory();
 
 				$response[] = $responseRow;
 			}
@@ -165,6 +169,41 @@ class AccountDAO {
 				$responseRow["balance"] = $account->getBalance();
 				$responseRow["chargeId"] = $account->getChargeId();
 				$responseRow["interest"] = $account->getInterest();
+				$responseRow["category"] = $account->getCategory();
+
+				$response[] = $responseRow;
+			}
+			return $response;
+		} catch (PDOException $e) {
+			echo ($e->getMessage());
+		} finally {
+			unset($pdo);
+		}
+	}
+
+	public function getAccountsByClientAndCategory($id, $category) {
+		try {
+			$pdo = new PDO($this->connectString, $this->user, $this->password);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$stmt = $pdo->prepare("SELECT *
+					FROM account
+					JOIN client_account ON client_account.account_number = account.account_number
+					JOIN client ON client_account.client_id = client.client_id
+					WHERE client.client_id=:id AND account_category=:category");
+			$stmt->bindValue(':id', $id);
+			$stmt->bindValue(':category', $category);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Account');
+
+			$response = [];
+
+			while ($account = $stmt->fetch()) {
+				$responseRow["number"] = $account->getNumber();
+				$responseRow["type"] = $account->getType();
+				$responseRow["balance"] = $account->getBalance();
+				$responseRow["chargeId"] = $account->getChargeId();
+				$responseRow["interest"] = $account->getInterest();
+				$responseRow["category"] = $account->getCategory();
 
 				$response[] = $responseRow;
 			}
@@ -262,6 +301,7 @@ class AccountDAO {
 				$responseRow["balance"] = $account->getBalance();
 				$responseRow["chargeId"] = $account->getChargeId();
 				$responseRow["interest"] = $account->getInterest();
+				$responseRow["category"] = $account->getCategory();
 
 				$response[] = $responseRow;
 			}

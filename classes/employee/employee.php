@@ -11,10 +11,10 @@
 		private $employee_type;
 		private $salary;
 		private $start_date;
-		private $branch_id;
+		private $works_for_branch;
 
 		function __construct($employee_id=0, $title="", $first_name="", $last_name="", $email="", $phone="", 
-			$address="", $employee_type="", $salary=0.0, $start_date="", $branch_id=0) {
+			$address="", $employee_type="", $salary=0.0, $start_date="", $works_for_branch=0) {
 			$this->setId($employee_id);
 			$this->setTitle($title);
 			$this->setFirstName($first_name);
@@ -25,7 +25,7 @@
 			$this->setType($employee_type);
 			$this->setSalary($salary);
 			$this->setStartDate($start_date);
-			$this->setBranchId($branch_id);
+			$this->setBranchId($works_for_branch);
 		}
 
 		public function getId(){
@@ -109,11 +109,11 @@
 		}
 
 		public function getBranchId(){
-			return $this->branch_id;
+			return $this->works_for_branch;
 		}
 
 		public function setBranchId($branch_id){
-			$this->branch_id = $branch_id;
+			$this->works_for_branch = $works_for_branch;
 		}
 
 		public function __toString(){
@@ -126,7 +126,7 @@
 					address: $this->address <br/>
 					type: $this->type <br/>
 					salary: $this->salary <br/>
-					branchId: $this->branch_id <br/>
+					branchId: $this->works_for_branch <br/>
 					startDate: $this->start_date";
         }
 	}

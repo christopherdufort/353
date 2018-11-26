@@ -18,20 +18,19 @@ class BranchDAO {
 		$this->password = "W5T7N3C9";
 	}
 
-	public function createBranch($name, $location, $phone, $fax, $openingDate, $managerId) {
+	public function createBranch($name, $location, $phone, $fax, $openingDate) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			$stmt = $pdo->prepare("INSERT INTO branch(branch_name,location,phone,fax,opening_date,manager_id)
-					VALUES(:name,:location,:phone,:fax,:openingDate,:managerId);");
+					VALUES(:name,:location,:phone,:fax,:openingDate);");
 
 			$stmt->bindValue(':name', $name);
 			$stmt->bindValue(':location', $location);
 			$stmt->bindValue(':phone', $phone);
 			$stmt->bindValue(':fax', $fax);
 			$stmt->bindValue(':openingDate', $openingDate);
-			$stmt->bindValue(':managerId', $managerId);
 			$stmt->execute();
 
 			return $pdo->lastInsertId();
@@ -43,7 +42,7 @@ class BranchDAO {
 		}
 	}
 
-	public function updateBranch($id, $name, $location, $phone, $fax, $openingDate, $managerId) {
+	public function updateBranch($id, $name, $location, $phone, $fax, $openingDate) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -58,7 +57,6 @@ class BranchDAO {
 			$stmt->bindValue(':phone', $phone);
 			$stmt->bindValue(':fax', $fax);
 			$stmt->bindValue(':openingDate', $openingDate);
-			$stmt->bindValue(':managerId', $managerId);
 			$stmt->execute();
 
 			return $stmt->rowCount();
@@ -109,7 +107,6 @@ class BranchDAO {
 				$response["phone"] = $branch->getPhone();
 				$response["fax"] = $branch->getFax();
 				$response["openingDate"] = $branch->getOpeningDate();
-				$response["managerId"] = $branch->getManagerId();
 			}
 
 			return $response;
@@ -139,7 +136,6 @@ class BranchDAO {
 				$responseRow["phone"] = $branch->getPhone();
 				$responseRow["fax"] = $branch->getFax();
 				$responseRow["openingDate"] = $branch->getOpeningDate();
-				$responseRow["managerId"] = $branch->getManagerId();
 
 				$response[] = $responseRow;
 			}
