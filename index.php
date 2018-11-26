@@ -10,6 +10,8 @@ include "views/header.php";
 
 if (isset($_GET['page']) && $_GET['page'] == 'accounts') {
 	include "views/accounts.php";
+} else if (isset($_GET['page']) && $_GET['page'] == 'signup') {
+    include "views/signup.php";
 } else if (isset($_GET['page']) && $_GET['page'] == 'login') {
 	include "views/login.php";
 } else if (isset($_GET['page']) && $_GET['page'] == 'bills') {

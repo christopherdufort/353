@@ -23,6 +23,8 @@ if (isset($_POST['login'])) {
 	}
 
 }
+# Sign up
+# Do Stuff
 # Logout
 if (isset($_POST['logout'])) {
 
