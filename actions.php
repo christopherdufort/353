@@ -40,7 +40,7 @@ if (isset($_POST['logout'])) {
 if (isset($_POST['transfer'])) {
 
 	$db = new AccountDAO();
-	$client = $db->transferMoney($_POST['from'], $_POST['to'], $_POST['amount']);
+	$db->transferMoney($_POST['from'], $_POST['to'], $_POST['amount']);
 	header("Location: index.php?page=accounts");
 	exit;
 
