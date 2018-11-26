@@ -3,35 +3,24 @@
 include "functions.php";
 include 'classes/client/clientDAO.php';
 include 'classes/account/accountDAO.php';
+include 'classes/login/loginDAO.php';
 
 # Login
 if (isset($_POST['login'])) {
-	$db = new ClientDAO();
-	$client = $db->getClient($_POST['id']);
-	if ($client) {
+	$db = new loginDAO();
+	$login = $db->loginUser($_POST['cardNumber'], $_POST['password']);
+	if ($login == FALSE) {
+		$_SESSION['message'] = 'Wrong card number or password!';
+		header("Location: index.php?page=login");
+		exit;
+	} else {
+		$db = new clientDAO();
+		$client = $db->getClient($login);
 		$_SESSION['client'] = $client;
 		$_SESSION['is_logged'] = TRUE;
 		header("Location: index.php?page=accounts");
 		exit;
 	}
-
-	/*if (!$client) {
-			$_SESSION['message'] = 'Wrong account id or password!';
-			# redirect
-			header("Location: index.php?page=login");
-			exit;
-		} else if ($_POST['password'] != $client['client_password']) {
-
-			$_SESSION['message'] = 'Wrong password!';
-			header("Location: index.php?page=login");
-			exit;
-
-		} else if ($_POST['password'] == $client['client_password']) {
-			$_SESSION['client'] = $client;
-			$_SESSION['is_logged'] = TRUE;
-			header("Location: index.php?page=accounts");
-			exit;
-	*/
 
 }
 # Logout
