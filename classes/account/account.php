@@ -6,13 +6,15 @@
 		private $balance;
 		private $charge_plan_id;
 		private $account_interest;
+		private $account_category;
 
-		function __construct($account_number=0, $account_type="", $balance=0.0, $charge_plan_id=0, $account_interest=0.0) {
+		function __construct($account_number=0, $account_type="", $balance=0.0, $charge_plan_id=0, $account_interest=0.0, $account_category="") {
 			$this->setNumber($account_number);
 			$this->setType($account_type);
 			$this->setBalance($balance);
 			$this->setChargeId($charge_plan_id);
 			$this->setInterest($account_interest);
+			$this->setCategory($account_category);
 		}
 
 		public function getNumber(){
@@ -55,11 +57,20 @@
 			$this->account_interest = $account_interest;
 		}
 
+		public function getCategory(){
+			return $this->account_category;
+		}
+
+		public function setCategory($account_category){
+			$this->account_category = $account_category;
+		}
+
 		public function __toString(){
         	return "number: $this->account_number <br/>
 					type: $this->account_type <br/>
 					balance: $this->balance <br/>
 					chargeId: $this->charge_plan_id <br/>
+					category: $this->account_category <br/>
 					interest: $this->account_interest";
         }
 	}

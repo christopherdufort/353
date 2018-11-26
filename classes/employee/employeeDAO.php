@@ -25,7 +25,7 @@ class EmployeeDAO {
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			$stmt = $pdo->prepare("INSERT INTO employee(title,first_name,last_name,email,phone,address,
-					employee_type,salary,start_date,branch_id) VALUES(:title,:firstName,:lastName,:email,:phone,:address,
+					employee_type,salary,start_date,works_for_branch) VALUES(:title,:firstName,:lastName,:email,:phone,:address,
 					:type,:salary,:startDate,:branchId);");
 
 			$stmt->bindValue(':title', $title);
@@ -58,7 +58,7 @@ class EmployeeDAO {
 			$stmt = $pdo->prepare("UPDATE employee
 					SET title=:title, first_name=:firstName, last_name=:lastName,
 					email=:email, phone=:phone, address=:address, employee_type=:type,
-					salary=:salary, start_date=:startDate, branch_id=:branchId WHERE employee_id=:id");
+					salary=:salary, start_date=:startDate, works_for_branch=:branchId WHERE employee_id=:id");
 
 			$stmt->bindValue(':id', $id);
 			$stmt->bindValue(':title', $title);

@@ -7,16 +7,14 @@
 		private $phone;
 		private $fax;
 		private $opening_date;
-		private $manager_id;
 
-		function __construct($branch_id=0, $branch_name="", $location="", $phone="", $fax="", $opening_date="", $manager_id=0) {
+		function __construct($branch_id=0, $branch_name="", $location="", $phone="", $fax="") {
 			$this->setId($branch_id);
 			$this->setName($branch_name);
 			$this->setLocation($location);
 			$this->setPhone($phone);
 			$this->setFax($fax);
 			$this->setOpeningDate($opening_date);
-			$this->setManagerId($manager_id);
 		}
 
 		public function getId(){
@@ -67,21 +65,12 @@
 			$this->opening_date = $opening_date;
 		}
 
-		public function getManagerId(){
-			return $this->manager_id;
-		}
-
-		public function setManagerId($manager_id){
-			$this->manager_id = $manager_id;
-		}
-
 		public function __toString(){
         	return "id: $this->branch_id <br/>
 					name: $this->branch_name <br/>
 					location: $this->opening_date <br/>
 					phone: $this->phone <br/>
 					fax: $this->fax <br/>
-					openingDate: $this->openingDate <br/>
-					managerId: $this->manager_id";
+					openingDate: $this->openingDate";
         }
 	}
