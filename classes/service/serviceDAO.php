@@ -16,20 +16,22 @@ class ServiceDAO {
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
 		$this->password = "";
+		$this->password = "W5T7N3C9";
 	}
 
-	public function createService($name, $interestRate, $managerId, $chargeId) {
+	public function createService($name, $interestRate, $managerId, $chargeId, $amount_due) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$stmt = $pdo->prepare("INSERT INTO service(service_name,service_interest,manager_id,charge_plan_id)
-					VALUES(:name,:interestRate,:managerId,:chargeId);");
+			$stmt = $pdo->prepare("INSERT INTO service(service_name,service_interest,manager_id,charge_plan_id, amount_due)
+					VALUES(:name,:interestRate,:managerId,:chargeId, :amount_due);");
 
 			$stmt->bindValue(':name', $name);
 			$stmt->bindValue(':interestRate', $interestRate);
 			$stmt->bindValue(':managerId', $managerId);
 			$stmt->bindValue(':chargeId', $chargeId);
+			$stmt->bindValue(':amount_due', $amount_due);
 			$stmt->execute();
 
 			return $pdo->lastInsertId();
@@ -41,13 +43,13 @@ class ServiceDAO {
 		}
 	}
 
-	public function updateService($id, $name, $interestRate, $managerId, $chargeId) {
+	public function updateService($id, $name, $interestRate, $managerId, $chargeId, $amount_due) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			$stmt = $pdo->prepare("UPDATE service
-					SET service_name=:name, service_interest=:interestRate, manager_id=:managerId, charge_plan_id=:chargeId
+					SET service_name=:name, service_interest=:interestRate, manager_id=:managerId, charge_plan_id=:chargeId, amount_due=:amount_due
 					WHERE service_id=:id");
 
 			$stmt->bindValue(':id', $id);
@@ -55,6 +57,7 @@ class ServiceDAO {
 			$stmt->bindValue(':interestRate', $interestRate);
 			$stmt->bindValue(':managerId', $managerId);
 			$stmt->bindValue(':chargeId', $chargeId);
+			$stmt->bindValue(':amount_due', $amount_due);
 			$stmt->execute();
 
 			return $stmt->rowCount();
@@ -103,6 +106,7 @@ class ServiceDAO {
 				$response["interestRate"] = $service->getInterestRate();
 				$response["managerId"] = $service->getManagerId();
 				$response["chargeId"] = $service->getChargeId();
+				$response["amount_due"] = $service->getAmountDue();
 			}
 
 			return $response;
@@ -135,6 +139,7 @@ class ServiceDAO {
 				$responseRow["interestRate"] = $service->getInterestRate();
 				$responseRow["managerId"] = $service->getManagerId();
 				$responseRow["chargeId"] = $service->getChargeId();
+				$responseRow["amount_due"] = $service->getAmountDue();
 
 				$response[] = $responseRow;
 			}
@@ -162,6 +167,7 @@ class ServiceDAO {
 				$responseRow["interestRate"] = $branch->getInterestRate();
 				$responseRow["managerId"] = $branch->getManagerId();
 				$responseRow["chargeId"] = $branch->getChargeId();
+				$response["amount_due"] = $service->getAmountDue();
 
 				$response[] = $responseRow;
 			}

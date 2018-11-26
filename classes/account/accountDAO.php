@@ -15,7 +15,8 @@ class AccountDAO {
 		# if local
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
-		$this->password = "";
+		#$this->password = "";
+		$this->password = "W5T7N3C9";
 	}
 
 	public function createAccount($type, $balance, $chargeId, $interest, $category) {
@@ -238,18 +239,16 @@ class AccountDAO {
 		}
 	}
 
-	public function payDebts($payFrom, $payTo, $amount) {
+	public function payBills($payFrom, $payTo, $amount) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $pdo->prepare("UPDATE account SET balance=:balance - :amount WHERE account_number=:number");
-			#$stmt->bindValue(':balance', $balance);
+			$stmt = $pdo->prepare("UPDATE account SET balance=balance - :amount WHERE account_number=:number");
 			$stmt->bindValue(':number', $payFrom);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
 
-			$stmt = $pdo->prepare("UPDATE account SET balance=:balance + :amount WHERE account_number=:number");
-			#$stmt->bindValue(':balance', $balance);
+			$stmt = $pdo->prepare("UPDATE service SET amount_due = amount_due - :amount WHERE service_id=:number");
 			$stmt->bindValue(':number', $payTo);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();

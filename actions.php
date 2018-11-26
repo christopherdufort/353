@@ -42,4 +42,14 @@ if (isset($_POST['transfer'])) {
 
 }
 
+# Pay Bills
+if (isset($_POST['paybills'])) {
+
+	$db = new AccountDAO();
+	$db->payBills($_POST['from'], $_POST['to'], $_POST['amount']);
+	header("Location: index.php?page=pay_bills");
+	exit;
+
+}
+
 ?>

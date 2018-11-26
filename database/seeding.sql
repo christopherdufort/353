@@ -104,14 +104,14 @@ UNLOCK TABLES;
 -- Data for table `service`
 --
 LOCK TABLES `service` WRITE;
-INSERT INTO `service` VALUES (1,'credit card',10,19.00,1,'banking'),
-							(2,'line of credit',11,5.00,2,'banking'),
-							(3,'mortgage',12,3.00,3,'investment'),
-							(4,'investment portfolio',13,8.00,4,'investment'),
-							(5,'personal loan',14,10.00,5,'banking'),
-							(6,'student line of credit',11,8.50,6,'banking'),
-							(7,'reward credit card',10,17.00,7,'banking'),
-							(8,'life insurance',13, 1.25,7,'insurance');
+INSERT INTO `service` VALUES (1,'credit card',10,19.00,1,'banking', 100.00),
+							(2,'line of credit',11,5.00,2,'banking', 100.00),
+							(3,'mortgage',12,3.00,3,'investment', 100.00),
+							(4,'investment portfolio',13,8.00,4,'investment', 100.00),
+							(5,'personal loan',14,10.00,5,'banking', 100.00),
+							(6,'student line of credit',11,8.50,6,'banking', 100.00),
+							(7,'reward credit card',10,17.00,7,'banking', 60.00),
+							(8,'life insurance',13, 1.25,7,'insurance', 43.00);
 UNLOCK TABLES;
 
 --
