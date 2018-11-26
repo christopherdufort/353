@@ -131,6 +131,7 @@ CREATE TABLE `service` (
   `service_interest` decimal(5,2) DEFAULT NULL,
   `charge_plan_id` int(11) DEFAULT NULL,
   `service_type` varchar(255) DEFAULT NULL,
+  `amount_due` decimal(11,2) DEFAULT NULL,
   PRIMARY KEY (`service_id`),
   FOREIGN KEY (`charge_plan_id`) REFERENCES `charge_plan` (`charge_id`),
   FOREIGN KEY (`manager_id`) REFERENCES `employee` (`employee_id`)
