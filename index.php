@@ -7,15 +7,16 @@ include "functions.php";
 include "views/header.php";
 
 # Redirect to different pages in views/
-if ($_GET['page'] == 'accounts') {
+
+if (isset($_GET['page']) && $_GET['page'] == 'accounts') {
 	include "views/accounts.php";
-} else if ($_GET['page'] == 'login') {
+} else if (isset($_GET['page']) && $_GET['page'] == 'login') {
 	include "views/login.php";
-} else if ($_GET['page'] == 'bills') {
+} else if (isset($_GET['page']) && $_GET['page'] == 'bills') {
 	include "views/pay_bills.php";
-} else if ($_GET['page'] == 'client_page') {
+} else if (isset($_GET['page']) && $_GET['page'] == 'client_page') {
 	include "views/client_page.php";
-} else if ($_GET['page'] == 'sendmoney') {
+} else if (isset($_GET['page']) && $_GET['page'] == 'sendmoney') {
 	include "views/sendmoney.php";
 } else {
 	include "views/home.php";
