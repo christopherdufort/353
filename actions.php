@@ -42,4 +42,14 @@ if (isset($_POST['transfer'])) {
 
 }
 
+# eTransfer money between accounts
+if (isset($_POST['etransfer'])) {
+
+	$db = new AccountDAO();
+	$db->eTransfer($_POST['number'], $_POST['emailOrPhone'], $_POST['amount']);
+	header("Location: index.php?page=sendmoney");
+	exit;
+
+}
+
 ?>
