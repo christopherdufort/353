@@ -96,8 +96,8 @@ UNLOCK TABLES;
 -- Data for table `login`
 --
 LOCK TABLES `login` WRITE;
-INSERT INTO `login` VALUES (1234567890, password, 1, 1),
-							(0987654321, password, 0, 1);
+INSERT INTO `login` VALUES (1234567890, "password", 1, 1),
+							(0987654321, "password", 0, 1);
 UNLOCK TABLES;
 
 --

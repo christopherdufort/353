@@ -47,9 +47,9 @@
                         </li>
                     </ul>
                     <?php } else {?>
-                    <form class="form-signin" action="actions.php" method="post">
-                        <button class="btn btn-success-outline" type="submit" name="login" value="login"> Login </button>
-                    </form>
+                    <a class="btn btn-info" href="?page=login" role="button">
+                        Login
+                    </a>
                     <?php }?>
                 </div>
             </div>
