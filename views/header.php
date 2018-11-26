@@ -21,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <?php if ($_SESSION['is_logged']) {?>
+                    <?php if (isset($_SESSION['is_logged']) && $_SESSION['is_logged']) {?>
                     <li class="nav-item">
                         <a class="nav-link" href="?page=accounts"> My Accounts </a>
                     </li>
@@ -34,7 +34,7 @@
                     <?php }?>
                 </ul>
                 <div class="form-inline pull-xs-right">
-                    <?php if ($_SESSION['is_logged']) {?>
+                    <?php if (isset($_SESSION['is_logged']) && $_SESSION['is_logged']) {?>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item px-4">
                             <a class="nav-link" href="?page=client_page"> <?php echo $_SESSION['client']['firstName'] . ' ' . $_SESSION['client']['lastName']; ?> <i class="far fa-user-circle"></i>
@@ -49,6 +49,9 @@
                     <?php } else {?>
                     <a class="btn btn-info" href="?page=login" role="button">
                         Login
+                    </a>
+                    <a class="btn btn-info ml-2" href="?page=signup" role="button">
+                        Sign Up
                     </a>
                     <?php }?>
                 </div>

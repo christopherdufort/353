@@ -264,17 +264,27 @@ class AccountDAO {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $pdo->prepare("UPDATE account SET balance=:balance - :amount WHERE account_number=:number");
-			$stmt->bindValue(':balance', $balance);
-			$stmt->bindValue(':number', $number);
-			$stmt->bindValue(':amount', $amount);
+			$stmt = $pdo->prepare("SELECT account_number FROM account 
+									JOIN client_account ON account.account_number = client_account.account_number 
+									JOIN client ON client_account.client_id = client.client_id 
+									WHERE client.email = :emailOrPhone OR client.phone = :emailOrPhone 
+									LIMIT 1;");
+			$stmt->bindValue(':emailOrPhone', $emailOrPhone);
 			$stmt->execute();
 
-			//join on client and look for account that is personal checking?
-			$stmt = $pdo->prepare("UPDATE account SET balance=:balance + :amount WHERE email=:emailOrPhone OR phone=:emailOrPhone");
-			$stmt->bindValue(':balance', $balance);
+			$toNumber = 0;
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$toNumber = $row['account_number'];
+
+			$stmt = $pdo->prepare("UPDATE account SET balance=balance - :amount WHERE account_number=:number");
 			$stmt->bindValue(':amount', $amount);
-			$stmt->bindValue(':emailOrPhone', $emailOrPhone);
+			$stmt->bindValue(':number', $number);
+			$stmt->execute();
+			return $stmt->rowCount();
+
+			$stmt = $pdo->prepare("UPDATE account SET balance=balance + :amount WHERE account_number=:toNumber");
+			$stmt->bindValue(':amount', $amount);
+			$stmt->bindValue(':toNumber', $toNumber);
 			$stmt->execute();
 			return $stmt->rowCount();
 		} catch (PDOException $e) {

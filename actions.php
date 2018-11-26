@@ -23,6 +23,8 @@ if (isset($_POST['login'])) {
 	}
 
 }
+# Sign up
+# Do Stuff
 # Logout
 if (isset($_POST['logout'])) {
 
@@ -42,12 +44,19 @@ if (isset($_POST['transfer'])) {
 
 }
 
-# Pay Bills
 if (isset($_POST['paybills'])) {
 
 	$db = new AccountDAO();
 	$db->payBills($_POST['from'], $_POST['to'], $_POST['amount']);
 	header("Location: index.php?page=pay_bills");
+  exit;
+}
+# eTransfer money between accounts
+if (isset($_POST['etransfer'])) {
+
+	$db = new AccountDAO();
+	$db->eTransfer($_POST['number'], $_POST['emailOrPhone'], $_POST['amount']);
+	header("Location: index.php?page=sendmoney");
 	exit;
 
 }
