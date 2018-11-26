@@ -28,17 +28,16 @@
                 </ul>
                 <div class="form-inline pull-xs-right">
                     
-                    <?php if ($_SESSION['id']) { ?>
+                    <?php if (isset($_SESSION['id'])): ?>
                     
-                    <a class="btn btn-success-outline" href="?function=logout"> Logout </a>
-                    
-                    <?php } else { ?>
-                    
-                    <a class="nav-lin" href="?page=login">
-                    <button class="btn btn-success-outline" data-toggle="modal" data-target="#myModal"> Login </button>
+                        <a class="btn btn-success-outline" href="?function=logout"> Logout </a>
+
+                    <?php  else : ?>
+                        <a class="nav-lin" href="?page=login">
+                        <button class="btn btn-success-outline" data-toggle="modal" data-target="#myModal"> Login </button>
                 </a>
                     
-                    <?php } ?>
+                    <?php endif; ?>
 
                 </div>
             </div>
