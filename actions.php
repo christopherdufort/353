@@ -44,6 +44,13 @@ if (isset($_POST['transfer'])) {
 
 }
 
+if (isset($_POST['paybills'])) {
+
+	$db = new AccountDAO();
+	$db->payBills($_POST['from'], $_POST['to'], $_POST['amount']);
+	header("Location: index.php?page=pay_bills");
+  exit;
+}
 # eTransfer money between accounts
 if (isset($_POST['etransfer'])) {
 

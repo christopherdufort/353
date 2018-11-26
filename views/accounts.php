@@ -41,23 +41,5 @@ foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
     </div>
     </br>
     <?php }?>
-    </br>
-    <h1> My Services </h1>
-    </br>
-    <?php
-include 'classes/service/serviceDAO.php';
-$db = new serviceDAO();
-foreach ($db->getServicesByClient($_SESSION['client']['id']) as $service) {
-	?>
-    <div class="card">
-        <div class="card-header">
-            <?php echo 'Service ID: ' . $service['id']; ?>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title"><?php echo ucwords($service['name']); ?></h5>
-            <p class="card-text">Interest Rate: <?php echo $service['interestRate']; ?>%</p>
-        </div>
-    </div>
-    </br>
-    <?php }?>
+    <br/>
 </main>

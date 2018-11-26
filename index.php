@@ -20,6 +20,8 @@ if (isset($_GET['page']) && $_GET['page'] == 'accounts') {
 	include "views/client_page.php";
 } else if (isset($_GET['page']) && $_GET['page'] == 'sendmoney') {
 	include "views/sendmoney.php";
+} else if (isset($_GET['page']) && $_GET['page'] == 'pay_bills') {
+	include "views/pay_bills.php";
 } else {
 	include "views/home.php";
 }
