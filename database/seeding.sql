@@ -68,11 +68,11 @@ UNLOCK TABLES;
 -- Data for table `client`
 --
 LOCK TABLES `client` WRITE;
-INSERT INTO `client` VALUES (1,'Roberto','Carlos','1978-08-09','2008-06-17','123, birch st.','r.carlos@gmail.com','5146723465',1,'personal'),
-(2,'Nina','Robert','1992-02-23','2006-04-07','63, park av.','nina2002@hotmail.com','5145721241',2,'student'),
-(3,'Ron','MacTavish','1988-07-15','2003-01-27','909, pine st.','mactavish.ron@yahoo.com','5146723465',3,'personal'),
-(4,'Eric','Hamel','1994-03-06','2009-06-14','999, Saint Joseph.','eric.h@gmail.com','5146123600',4,'business'),
-(5,'Lucy','Milot','1988-04-21','2013-02-13','32, park hil Av..','lm_2000@yahoo.com','5146124462',5,'corporate');
+INSERT INTO `client` VALUES (1,'Roberto','Carlos','1978-08-09','2008-06-17','123, birch st.','r.carlos@gmail.com','5146723465',1),
+(2,'Nina','Robert','1992-02-23','2006-04-07','63, park av.','nina2002@hotmail.com','5145721241',2),
+(3,'Ron','MacTavish','1988-07-15','2003-01-27','909, pine st.','mactavish.ron@yahoo.com','5146723465',3),
+(4,'Eric','Hamel','1994-03-06','2009-06-14','999, Saint Joseph.','eric.h@gmail.com','5146123600',4),
+(5,'Lucy','Milot','1988-04-21','2013-02-13','32, park hil Av..','lm_2000@yahoo.com','5146124462',5);
 UNLOCK TABLES;
 
 --
@@ -96,8 +96,8 @@ UNLOCK TABLES;
 -- Data for table `login`
 --
 LOCK TABLES `login` WRITE;
-INSERT INTO `login` VALUES (1234567890, "password", 1, 1),
-							(0987654321, "password", 0, 1);
+INSERT INTO `login` VALUES (1, 1234567890, "password", 1, 1),
+							(2, 0987654321, "password", 0, 1);
 UNLOCK TABLES;
 
 --
@@ -135,11 +135,11 @@ UNLOCK TABLES;
 -- Data for table `account`
 --
 LOCK TABLES `account` WRITE;
-INSERT INTO `account` VALUES (1154378,'checking',0.00,234.00,8),
-							(7835092,'savings',2.50,25000.00,9),
-							(7843328,'checking',1.50,10000.00,8),
-							(8736736,'savings',3.00,3000.00,9),
-							(9056348,'savings',4.50,1000000.00,11);
+INSERT INTO `account` VALUES (1154378,'checking',0.00,234.00,8,'personal'),
+							(7835092,'savings',2.50,25000.00,9,'business'),
+							(7843328,'checking',1.50,10000.00,8,'personal'),
+							(8736736,'savings',3.00,3000.00,9,'personal'),
+							(9056348,'savings',4.50,1000000.00,11,'business');
 UNLOCK TABLES;
 
 --
