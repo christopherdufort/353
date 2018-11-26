@@ -180,14 +180,14 @@ class AccountDAO {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $pdo->prepare("UPDATE account SET balance = balance - :amount WHERE account_number =:number");
-			#$stmt->bindValue(':balance', $balance);
+			$stmt = $pdo->prepare("UPDATE account SET balance = balance - :amount WHERE account_number=:number");
+			# $stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':number', $fromNumber);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
 
-			$stmt = $pdo->prepare("UPDATE account SET balance = balance + :amount WHERE account_number=:number");
-			#$stmt->bindValue(':balance', $balance);
+			$stmt = $pdo->prepare("UPDATE account SET balance = balance + :amount WHERE account_number= :number");
+			# $stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':number', $toNumber);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
@@ -204,13 +204,13 @@ class AccountDAO {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$stmt = $pdo->prepare("UPDATE account SET balance=:balance - :amount WHERE account_number=:number");
-			$stmt->bindValue(':balance', $balance);
+			#$stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':number', $payFrom);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
 
-			$stmt = $pdo->prepare("UPDATE account SET balance=:balance - :amount WHERE account_number=:number");
-			$stmt->bindValue(':balance', $balance);
+			$stmt = $pdo->prepare("UPDATE account SET balance=:balance + :amount WHERE account_number=:number");
+			#$stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':number', $payTo);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
