@@ -11,11 +11,11 @@ class AccountDAO {
 		# if connecting to school
 		#$this->connectString = "mysql:host=gec353.encs.concordia.ca;dbname=gec353_2;charset=utf8mb4";
 		#$this->user = "gec353_2";
-		#$this->password = "W5T7N3C9";
+		#$this->password = "";
 		# if local
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
-		$this->password = "W5T7N3C9";
+		$this->password = "";
 	}
 
 	public function createAccount($type, $balance, $chargeId, $interest, $category) {

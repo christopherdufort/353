@@ -181,6 +181,7 @@ CREATE TABLE `transactions`(
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `from_account` int(11) NOT NULL,
   `to_account` int(11) NOT NULL,
+  `amount` decimal(11,2) NOT NULL,
   `transaction_date` date NOT NULL,
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
