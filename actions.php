@@ -88,4 +88,15 @@ if (isset($_POST['etransfer'])) {
 
 }
 
+if (isset($_POST['alertsInput'])) {
+	$db = new ClientDAO();
+	$checked = 0;
+	if ($_SESSION['client']['alerts'] == 0)
+		$checked = 1;
+	$db->setAlerts($_SESSION['client']['id'], $checked);
+	$_SESSION['client']['alerts'] = $checked;
+	header("Location: index.php?page=client_page");
+	exit;
+}
+
 ?>
