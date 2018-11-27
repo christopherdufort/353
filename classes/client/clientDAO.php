@@ -20,14 +20,14 @@ class ClientDAO {
 	}
 
 	public function createClient($firstName, $lastName, $email, $phone, $address,
-		$birthDate, $joiningDate, $category, $branchId, $client_password) {
+		$birthDate, $joiningDate, $category, $branchId) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			$stmt = $pdo->prepare("INSERT INTO client(first_name,last_name,email,phone,address,
-					birth_date,joining_date,category,branch_id, client_password) VALUES(:firstName,:lastName,:email,:phone,:address,
-					:birthDate,:joiningDate,:category,:branchId,:client_password);");
+					birth_date,joining_date,category,branch_id) VALUES(:firstName,:lastName,:email,:phone,:address,
+					:birthDate,:joiningDate,:category,:branchId);");
 
 			$stmt->bindValue(':firstName', $firstName);
 			$stmt->bindValue(':lastName', $lastName);
@@ -38,7 +38,6 @@ class ClientDAO {
 			$stmt->bindValue(':joiningDate', $joiningDate);
 			$stmt->bindValue(':category', $category);
 			$stmt->bindValue(':branchId', $branchId);
-			$stmt->bindValue(':client_password', $client_password);
 			$stmt->execute();
 
 			return $pdo->lastInsertId();
@@ -51,7 +50,7 @@ class ClientDAO {
 	}
 
 	public function updateClient($id, $firstName, $lastName, $email, $phone,
-		$address, $birthDate, $joiningDate, $category, $branchId, $client_password) {
+		$address, $birthDate, $joiningDate, $category, $branchId, $alerts) {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -59,7 +58,7 @@ class ClientDAO {
 			$stmt = $pdo->prepare("UPDATE client
 					SET first_name=:firstName, last_name=:lastName,
 					email=:email, phone=:phone, address=:address, birth_date=:birthDate,
-					joining_date=:joiningDate, category=:category, branch_id=:branchId, client_password=:client_password WHERE client_id=:id");
+					joining_date=:joiningDate, category=:category, branch_id=:branchId, alerts=:alerts WHERE client_id=:id");
 
 			$stmt->bindValue(':id', $id);
 			$stmt->bindValue(':firstName', $firstName);
@@ -71,7 +70,27 @@ class ClientDAO {
 			$stmt->bindValue(':joiningDate', $joiningDate);
 			$stmt->bindValue(':category', $category);
 			$stmt->bindValue(':branchId', $branchId);
-			$stmt->bindValue(':client_password', $client_password);
+			$stmt->bindValue(':alerts', $alerts);
+			$stmt->execute();
+
+			return $stmt->rowCount();
+
+		} catch (PDOException $e) {
+			echo ($e->getMessage());
+		} finally {
+			unset($pdo);
+		}
+	}
+
+	public function setAlerts($id, $alerts) {
+		try {
+			$pdo = new PDO($this->connectString, $this->user, $this->password);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			$stmt = $pdo->prepare("UPDATE client SET alerts=:alerts WHERE client_id=:id");
+
+			$stmt->bindValue(':id', $id);
+			$stmt->bindValue(':alerts', $alerts);
 			$stmt->execute();
 
 			return $stmt->rowCount();
@@ -123,10 +142,9 @@ class ClientDAO {
 				$response["address"] = $client->getAddress();
 				$response["birthDate"] = $client->getBirthDate();
 				$response["joiningDate"] = $client->getJoiningDate();
-				$response["joiningDate"] = $client->getJoiningDate();
 				$response["category"] = $client->getCategory();
 				$response["branchId"] = $client->getBranchId();
-				$response["client_password"] = $client->getPassword();
+				$response["alerts"] = $client->getAlerts();
 			}
 
 			return $response;
@@ -160,7 +178,7 @@ class ClientDAO {
 				$responseRow["joiningDate"] = $client->getJoiningDate();
 				$responseRow["category"] = $client->getCategory();
 				$responseRow["branchId"] = $client->getBranchId();
-				$responseRow["client_password"] = $client->getPassword();
+				$responseRow["alerts"] = $client->getAlerts();
 
 				$response[] = $responseRow;
 			}
@@ -193,7 +211,7 @@ class ClientDAO {
 				$responseRow["joiningDate"] = $client->getJoiningDate();
 				$responseRow["category"] = $client->getCategory();
 				$responseRow["branchId"] = $client->getBranchId();
-				$responseRow["client_password"] = $client->getPassword();
+				$responseRow["alerts"] = $client->getAlerts();
 
 				$response[] = $responseRow;
 			}

@@ -11,10 +11,10 @@ class Client {
 	private $joining_date;
 	private $category;
 	private $branch_id;
-	private $client_password;
+	private $alerts;
 
 	function __construct($client_id = 0, $first_name = "", $last_name = "", $email = "", $phone = "",
-		$address = "", $birth_date = "", $joining_date = "", $category = "", $branch_id = 0, $client_password = "") {
+		$address = "", $birth_date = "", $joining_date = "", $category = "", $branch_id = 0, $alerts = 0) {
 		$this->setId($client_id);
 		$this->setFirstName($first_name);
 		$this->setLastName($last_name);
@@ -25,7 +25,7 @@ class Client {
 		$this->setJoiningDate($joining_date);
 		$this->setCategory($category);
 		$this->setBranchId($branch_id);
-		$this->setPassword($client_password);
+		$this->setAlerts($alerts);
 	}
 
 	public function getId() {
@@ -108,12 +108,12 @@ class Client {
 		$this->branch_id = $branch_id;
 	}
 
-	public function getPassword() {
-		return $this->client_password;
+	public function getAlerts() {
+		return $this->alerts;
 	}
 
-	public function setPassword($client_password) {
-		$this->client_password = $client_password;
+	public function setAlerts($alerts) {
+		$this->alerts = $alerts;
 	}
 
 	public function __toString() {
@@ -126,8 +126,8 @@ class Client {
 					birthDate: $this->birthDate <br/>
 					joiningDate: $this->joiningDate <br/>
 					category: $this->category <br/>
-					branchclient_id: $this->branchclient_id
-                    client_password: $this->client_password";
+					branchclient_id: $this->branchclient_id <br/>
+					alerts: $this->alerts";
 	}
 }
 ?>

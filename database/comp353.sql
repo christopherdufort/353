@@ -90,6 +90,7 @@ CREATE TABLE `client` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
+  `alerts` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`client_id`),
   FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branch_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
