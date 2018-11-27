@@ -264,7 +264,7 @@ class AccountDAO {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $pdo->prepare("SELECT account_number FROM account 
+			$stmt = $pdo->prepare("SELECT account.account_number FROM account 
 									JOIN client_account ON account.account_number = client_account.account_number 
 									JOIN client ON client_account.client_id = client.client_id 
 									WHERE client.email = :emailOrPhone OR client.phone = :emailOrPhone 
@@ -280,7 +280,7 @@ class AccountDAO {
 			$stmt->bindValue(':amount', $amount);
 			$stmt->bindValue(':number', $number);
 			$stmt->execute();
-			return $stmt->rowCount();
+			$stmt->rowCount();
 
 			$stmt = $pdo->prepare("UPDATE account SET balance=balance + :amount WHERE account_number=:toNumber");
 			$stmt->bindValue(':amount', $amount);

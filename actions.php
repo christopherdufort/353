@@ -78,11 +78,11 @@ if (isset($_POST['paybills'])) {
 	header("Location: index.php?page=pay_bills");
   exit;
 }
+
 # eTransfer money between accounts
 if (isset($_POST['etransfer'])) {
-
 	$db = new AccountDAO();
-	$db->eTransfer($_POST['number'], $_POST['emailOrPhone'], $_POST['amount']);
+	$db->eTransfer($_POST['from'], $_POST['to'], $_POST['amount']);
 	header("Location: index.php?page=sendmoney");
 	exit;
 
