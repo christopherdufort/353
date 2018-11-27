@@ -37,7 +37,6 @@ foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
             <h5 class="card-title"><?php echo ucfirst($account['type']); ?></h5>
             <p class="card-text">Balance: $<?php echo ucfirst($account['balance']); ?></p>
             <p class="card-text">Account Category: <?php echo ucfirst($account['category']); ?></p>
-            <a href="#" class="btn btn-primary">View Details</a>
         </div>
     </div>
     </br>
