@@ -22,10 +22,10 @@ if (isset($_SESSION['message'])) {
         <label for="inputBirthDate"> Birth Date ex(yyyy-mm-dd) </label>
         <input type="text" id="inputBirthDate" name="birthDate" class="form-control" placeholder="Birth Date" required>
         <label for="inputAddress"> Address </label>
-        <input type="text" id="inputAddress" name="Address" class="form-control" placeholder="Address" required>
+        <input type="text" id="inputAddress" name="address" class="form-control" placeholder="Address" required>
         <label for="inputEmail"> Email </label>
         <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required>
-        <label for="inputPhone"> Phone ex(XXX-XXX-XXXX)</label>
+        <label for="inputPhone"> Phone ex(0001112222)</label>
         <input type="text" id="inputPhone" name="phone" class="form-control" placeholder="Phone" required>
         <br/>
         <button class="btn btn-lg btn-info btn-block" type="submit" name="signup" value="Signup"> Signup </button>
