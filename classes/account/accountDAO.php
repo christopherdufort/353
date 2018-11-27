@@ -231,6 +231,15 @@ class AccountDAO {
 			$stmt->bindValue(':number', $toNumber);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
+
+			$stmt = $pdo->prepare("INSERT INTO transactions(from_account,to_account,amount,transaction_date)
+                    VALUES(:fromAccount,:toAccount,:amount,:transactionDate);");
+            $stmt->bindValue(':toAccount', $toNumber);
+            $stmt->bindValue(':fromAccount', $fromNumber);
+            $stmt->bindValue(':amount', $amount);
+			$stmt->bindValue(':transactionDate', date('Y-m-d', time()));
+			$stmt->execute();
+
 			return $stmt->rowCount();
 		} catch (PDOException $e) {
 			echo ($e->getMessage());
@@ -252,6 +261,15 @@ class AccountDAO {
 			$stmt->bindValue(':number', $payTo);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
+
+			$stmt = $pdo->prepare("INSERT INTO transactions(from_account,to_service,amount,transaction_date)
+                    VALUES(:fromAccount,:toService,:amount,:transactionDate);");
+            $stmt->bindValue(':toService', $payTo);
+            $stmt->bindValue(':fromAccount', $payFrom);
+            $stmt->bindValue(':amount', $amount);
+			$stmt->bindValue(':transactionDate', date('Y-m-d', time()));
+			$stmt->execute();
+
 			return $stmt->rowCount();
 		} catch (PDOException $e) {
 			echo ($e->getMessage());
@@ -280,12 +298,20 @@ class AccountDAO {
 			$stmt->bindValue(':amount', $amount);
 			$stmt->bindValue(':number', $number);
 			$stmt->execute();
-			$stmt->rowCount();
 
 			$stmt = $pdo->prepare("UPDATE account SET balance=balance + :amount WHERE account_number=:toNumber");
 			$stmt->bindValue(':amount', $amount);
 			$stmt->bindValue(':toNumber', $toNumber);
 			$stmt->execute();
+
+			$stmt = $pdo->prepare("INSERT INTO transactions(from_account,to_account,amount,transaction_date)
+					VALUES(:fromAccount,:toAccount,:amount,:transactionDate);");
+			$stmt->bindValue(':toAccount', $toNumber);
+			$stmt->bindValue(':fromAccount', $number);
+			$stmt->bindValue(':amount', $amount);
+			$stmt->bindValue(':transactionDate', date('Y-m-d', time()));
+			$stmt->execute();
+
 			return $stmt->rowCount();
 		} catch (PDOException $e) {
 			echo ($e->getMessage());

@@ -167,7 +167,7 @@ class ServiceDAO {
 				$responseRow["interestRate"] = $branch->getInterestRate();
 				$responseRow["managerId"] = $branch->getManagerId();
 				$responseRow["chargeId"] = $branch->getChargeId();
-				$response["amount_due"] = $service->getAmountDue();
+				$responseRow["amount_due"] = $service->getAmountDue();
 
 				$response[] = $responseRow;
 			}

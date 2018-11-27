@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?page=sendmoney"> Send Money </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=transactions"> View Transactions </a>
+                    </li>
                     <?php }?>
                 </ul>
                 <div class="form-inline pull-xs-right">
