@@ -4,6 +4,7 @@ include "functions.php";
 include 'classes/client/clientDAO.php';
 include 'classes/account/accountDAO.php';
 include 'classes/login/loginDAO.php';
+include 'classes/signup/signupDAO.php';
 
 # Login
 if (isset($_POST['login'])) {
@@ -24,7 +25,33 @@ if (isset($_POST['login'])) {
 
 }
 # Sign up
-# Do Stuff
+if (isset($_POST['signup'])) {
+    # Create a record in the client and login table for the user:
+    $db = new signupDAO();
+    $signup = $db->signupUser($_POST['cardNumber'], $_POST['password'], $_POST['firstName'], $_POST['lastName'], $_POST['birthDate'], $_POST['address'], $_POST['email'], $_POST['phone']);
+
+    if ($signup){
+        # Login the user afterwords;
+        $db = new loginDAO();
+        $login = $db->loginUser($_POST['cardNumber'], $_POST['password']);
+        if ($login == FALSE) {
+            $_SESSION['message'] = 'Wrong card number or password!';
+            header("Location: index.php?page=login");
+            exit;
+        } else {
+            $db = new clientDAO();
+            $client = $db->getClient($login);
+            $_SESSION['client'] = $client;
+            $_SESSION['is_logged'] = TRUE;
+            header("Location: index.php?page=accounts");
+            exit;
+        }
+    }else {
+        $_SESSION['message'] = 'Error occurred when creating account!';
+        header("Location: index.php?page=signup");
+    }
+
+}
 # Logout
 if (isset($_POST['logout'])) {
 
@@ -51,11 +78,11 @@ if (isset($_POST['paybills'])) {
 	header("Location: index.php?page=pay_bills");
   exit;
 }
+
 # eTransfer money between accounts
 if (isset($_POST['etransfer'])) {
-
 	$db = new AccountDAO();
-	$db->eTransfer($_POST['number'], $_POST['emailOrPhone'], $_POST['amount']);
+	$db->eTransfer($_POST['from'], $_POST['to'], $_POST['amount']);
 	header("Location: index.php?page=sendmoney");
 	exit;
 
