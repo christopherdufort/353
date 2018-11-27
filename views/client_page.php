@@ -30,10 +30,6 @@
                 <td><?php echo $_SESSION['client']['joiningDate']; ?></td>
             </tr>
             <tr>
-                <th scope="row">Category</th>
-                <td><?php echo $_SESSION['client']['category']; ?></td>
-            </tr>
-            <tr>
                 <th scope="row">Branch ID</th>
                 <td><?php echo $_SESSION['client']['branchId']; ?></td>
             </tr>
