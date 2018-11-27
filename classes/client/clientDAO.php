@@ -16,7 +16,7 @@ class ClientDAO {
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
 		$this->password = "";
-		#$this->password = "W5T7N3C9";
+		$this->password = "W5T7N3C9";
 	}
 
 	public function createClient($firstName, $lastName, $email, $phone, $address,
