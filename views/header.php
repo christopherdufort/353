@@ -21,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <?php if (isset($_SESSION['is_logged']) && $_SESSION['is_logged']) {?>
+                    <?php if (isset($_SESSION['is_logged']) && isset($_SESSION['client'])) {?>
                     <li class="nav-item">
                         <a class="nav-link" href="?page=accounts"> My Accounts </a>
                     </li>
@@ -34,14 +34,25 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?page=transactions"> View Transactions </a>
                     </li>
+                    <?php } else if (isset($_SESSION['is_logged']) && isset($_SESSION['employee'])) {?>
+                        <li class="nav-item">
+                        <a class="nav-link" href="?page=view_branches"> View Branches </a>
+                    </li>
+
+
                     <?php }?>
                 </ul>
                 <div class="form-inline pull-xs-right">
-                    <?php if (isset($_SESSION['is_logged']) && $_SESSION['is_logged']) {?>
+                    <?php if (isset($_SESSION['is_logged'])) {?>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item px-4">
+                            <?php if (isset($_SESSION['client'])) {?>
                             <a class="nav-link" href="?page=client_page"> <?php echo $_SESSION['client']['firstName'] . ' ' . $_SESSION['client']['lastName']; ?> <i class="far fa-user-circle"></i>
                             </a>
+                        <?php } else if (isset($_SESSION['employee'])) {?>
+                            <a class="nav-link" href="?page=employee_page"> <?php echo $_SESSION['employee']['firstName'] . ' ' . $_SESSION['employee']['lastName']; ?> <i class="far fa-user-circle"></i>
+                            </a>
+                        <?php }?>
                         </li>
                         <li class="nav-item">
                             <form class="form-signin" action="actions.php" method="post">

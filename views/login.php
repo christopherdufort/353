@@ -12,7 +12,7 @@ if (isset($_SESSION['message'])) {
     <form class="form-signin" action="actions.php" method="post">
         <h1 class="h3 mb-3 font-weight-normal text-center"> Login </h1>
 
-        <label for="inpinputcardnumberutid"> Client Card Number </label>
+        <label for="inpinputcardnumberutid"> Card Number </label>
         <input type="text" id="inputcardnumber" name="cardNumber" class="form-control" placeholder="Client Card Number" required autofocus>
     </br>
         <label for="inputPassword"> Password </label>

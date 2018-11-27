@@ -16,7 +16,7 @@ class AccountDAO {
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
 		$this->password = "";
-		#$this->password = "W5T7N3C9";
+		$this->password = "W5T7N3C9";
 	}
 
 	public function createAccount($type, $balance, $chargeId, $interest, $category) {
@@ -234,9 +234,9 @@ class AccountDAO {
 
 			$stmt = $pdo->prepare("INSERT INTO transactions(from_account,to_account,amount,transaction_date)
                     VALUES(:fromAccount,:toAccount,:amount,:transactionDate);");
-            $stmt->bindValue(':toAccount', $toNumber);
-            $stmt->bindValue(':fromAccount', $fromNumber);
-            $stmt->bindValue(':amount', $amount);
+			$stmt->bindValue(':toAccount', $toNumber);
+			$stmt->bindValue(':fromAccount', $fromNumber);
+			$stmt->bindValue(':amount', $amount);
 			$stmt->bindValue(':transactionDate', date('Y-m-d', time()));
 			$stmt->execute();
 
@@ -264,9 +264,9 @@ class AccountDAO {
 
 			$stmt = $pdo->prepare("INSERT INTO transactions(from_account,to_service,amount,transaction_date)
                     VALUES(:fromAccount,:toService,:amount,:transactionDate);");
-            $stmt->bindValue(':toService', $payTo);
-            $stmt->bindValue(':fromAccount', $payFrom);
-            $stmt->bindValue(':amount', $amount);
+			$stmt->bindValue(':toService', $payTo);
+			$stmt->bindValue(':fromAccount', $payFrom);
+			$stmt->bindValue(':amount', $amount);
 			$stmt->bindValue(':transactionDate', date('Y-m-d', time()));
 			$stmt->execute();
 
@@ -282,10 +282,10 @@ class AccountDAO {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$stmt = $pdo->prepare("SELECT account.account_number FROM account 
-									JOIN client_account ON account.account_number = client_account.account_number 
-									JOIN client ON client_account.client_id = client.client_id 
-									WHERE client.email = :emailOrPhone OR client.phone = :emailOrPhone 
+			$stmt = $pdo->prepare("SELECT account.account_number FROM account
+									JOIN client_account ON account.account_number = client_account.account_number
+									JOIN client ON client_account.client_id = client.client_id
+									WHERE client.email = :emailOrPhone OR client.phone = :emailOrPhone
 									LIMIT 1;");
 			$stmt->bindValue(':emailOrPhone', $emailOrPhone);
 			$stmt->execute();
