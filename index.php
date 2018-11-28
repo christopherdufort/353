@@ -28,6 +28,8 @@ if (isset($_GET['page'])) {
 		include "views/view_branches.php";
 	} else if ($_GET['page'] == 'transactions') {
 		include "views/transactions.php";
+	} else if ($_GET['page'] == 'add_account') {
+		include "views/add_account.php";
 	}} else {
 	include "views/home.php";
 }

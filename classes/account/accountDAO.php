@@ -24,14 +24,22 @@ class AccountDAO {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$stmt = $pdo->prepare("INSERT INTO account(account_type,balance,charge_plan_id,account_interest,account_category)
-					VALUES(:type,:balance,:chargeId,:interest,:category);");
-
+			$digits = 7;
+			$account_number = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+			$stmt = $pdo->prepare("INSERT INTO account(account_number, account_type,balance,charge_plan_id,account_interest,account_category)
+					VALUES(:account_number, :type,:balance,:chargeId,:interest,:category);");
+			$stmt->bindValue(':account_number', $account_number);
 			$stmt->bindValue(':type', $type);
 			$stmt->bindValue(':balance', $balance);
 			$stmt->bindValue(':chargeId', $chargeId);
 			$stmt->bindValue(':interest', $interest);
 			$stmt->bindValue(':category', $category);
+			$stmt->execute();
+
+			$stmt = $pdo->prepare("INSERT INTO client_account(client_id, account_number)
+                    VALUES(:client_id, :account_number);");
+			$stmt->bindValue(':client_id', $_SESSION['client']['id']);
+			$stmt->bindValue(':account_number', $account_number);
 			$stmt->execute();
 
 			return $pdo->lastInsertId();

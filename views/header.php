@@ -34,6 +34,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?page=transactions"> View Transactions </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=add_account"> Add an account </a>
+                    </li>
                     <?php } else if (isset($_SESSION['is_logged']) && isset($_SESSION['employee'])) {?>
                         <li class="nav-item">
                         <a class="nav-link" href="?page=view_branches"> View Branches </a>
