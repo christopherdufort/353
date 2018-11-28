@@ -101,12 +101,41 @@ if (isset($_POST['etransfer'])) {
 if (isset($_POST['alertsInput'])) {
 	$db = new ClientDAO();
 	$checked = 0;
-	if ($_SESSION['client']['alerts'] == 0)
+	if ($_SESSION['client']['alerts'] == 0) {
 		$checked = 1;
+	}
+
 	$db->setAlerts($_SESSION['client']['id'], $checked);
 	$_SESSION['client']['alerts'] = $checked;
 	header("Location: index.php?page=client_page");
 	exit;
+}
+
+# Transfer money between accounts
+if (isset($_POST['addaccount'])) {
+
+	$db = new AccountDAO();
+
+	$type = $_POST["accountType"];
+	$plan = $_POST["accountPlan"];
+	if ($type == "checking") {
+		if ($plan == "personal") {
+			$db->createAccount($type, 0, 8, 0, $plan);
+		} else if ($plan == "business") {
+			$db->createAccount($type, 0, 10, 0, $plan);
+		}
+
+	} else {
+		if ($plan == "personal") {
+			$db->createAccount($type, 0, 9, 2.0, $plan);
+		} else if ($plan == "business") {
+			$db->createAccount($type, 0, 11, 2.0, $plan);
+		}
+	}
+
+	header("Location: index.php?page=accounts");
+	exit;
+
 }
 
 ?>
