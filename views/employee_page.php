@@ -33,6 +33,11 @@
                 <th scope="row">Salary</th>
                 <td><?php echo $_SESSION['employee']['salary']; ?></td>
             </tr>
+
+            <tr>
+                <th scope="row">Sick Days Used</th>
+                <td>3</td>
+            </tr>
         </tbody>
     </table>
 </main>
