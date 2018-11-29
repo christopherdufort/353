@@ -16,7 +16,7 @@ class AccountDAO {
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
 		$this->password = "";
-		$this->password = "W5T7N3C9";
+		#$this->password = "W5T7N3C9";
 	}
 
 	public function createAccount($type, $balance, $chargeId, $interest, $category) {
@@ -265,7 +265,7 @@ class AccountDAO {
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();
 
-			$stmt = $pdo->prepare("UPDATE service SET amount_due = amount_due - :amount WHERE service_id=:number");
+			$stmt = $pdo->prepare("UPDATE client_service SET amount_due = amount_due - :amount WHERE service_id=:number");
 			$stmt->bindValue(':number', $payTo);
 			$stmt->bindValue(':amount', $amount);
 			$stmt->execute();

@@ -14,7 +14,7 @@
 			$this->setLocation($location);
 			$this->setPhone($phone);
 			$this->setFax($fax);
-			$this->setOpeningDate($opening_date);
+			$this->setOpeningDate(date("Y-m-d"));
 		}
 
 		public function getId(){

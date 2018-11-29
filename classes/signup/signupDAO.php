@@ -14,11 +14,12 @@ class SignupDAO {
 		$this->connectString = "mysql:host=localhost;dbname=gec353_2;charset=utf8mb4";
 		$this->user = "root";
 		$this->password = "";
-		$this->password = "W5T7N3C9";
+		#$this->password = "W5T7N3C9";
 	}
 
 	public function signupUser($cardNumber, $password, $firstName, $lastName, $birthDate, $address, $email, $phone) {
 		$noErrors = true;
+		$message = "Everything is good";
 
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);
@@ -48,9 +49,10 @@ class SignupDAO {
 		} catch (PDOException $e) {
 			echo ($e->getMessage());
 			$noErrors = false;
+            $message = $e->getMessage();
 		} finally {
 			unset($pdo);
-			return $noErrors;
+			return array($noErrors,$message);
 		}
 	}
 }

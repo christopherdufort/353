@@ -15,14 +15,14 @@ if (isset($_POST['login'])) {
 		$_SESSION['message'] = 'Wrong card number or password!';
 		header("Location: index.php?page=login");
 		exit;
-	} else if ($login['is_employee'] == 1) {
+	} else if ($login['is_employee'] == 0) { # zero being false -> not an employee so load client info
 		$db = new clientDAO();
 		$client = $db->getClient($login['user_id']);
 		$_SESSION['client'] = $client;
 		$_SESSION['is_logged'] = TRUE;
 		header("Location: index.php");
 		exit;
-	} else if ($login['is_employee'] == 0) {
+	} else if ($login['is_employee'] == 1) { # one being true -> is an employee, load employee info
 		$db = new employeeDAO();
 		$employee = $db->getEmployee($login['user_id']);
 		$_SESSION['employee'] = $employee;
@@ -37,9 +37,9 @@ if (isset($_POST['login'])) {
 if (isset($_POST['signup'])) {
 	# Create a record in the client and login table for the user:
 	$db = new signupDAO();
-	$signup = $db->signupUser($_POST['cardNumber'], $_POST['password'], $_POST['firstName'], $_POST['lastName'], $_POST['birthDate'], $_POST['address'], $_POST['email'], $_POST['phone']);
+	$signupResult = $db->signupUser($_POST['cardNumber'], $_POST['password'], $_POST['firstName'], $_POST['lastName'], $_POST['birthDate'], $_POST['address'], $_POST['email'], $_POST['phone']);
 
-	if ($signup) {
+	if ($signupResult[0]) {
 		# Login the user afterwords;
 		$db = new loginDAO();
 		$login = $db->loginUser($_POST['cardNumber'], $_POST['password']);
@@ -56,7 +56,7 @@ if (isset($_POST['signup'])) {
 			exit;
 		}
 	} else {
-		$_SESSION['message'] = 'Error occurred when creating account!';
+		$_SESSION['message'] = 'Error occurred when creating account! Error: ' . $signupResult[1];
 		header("Location: index.php?page=signup");
 	}
 
@@ -111,7 +111,7 @@ if (isset($_POST['alertsInput'])) {
 	exit;
 }
 
-# Transfer money between accounts
+# Add an account
 if (isset($_POST['addaccount'])) {
 
 	$db = new AccountDAO();
@@ -125,7 +125,7 @@ if (isset($_POST['addaccount'])) {
 			$db->createAccount($type, 0, 10, 0, $plan);
 		}
 
-	} else {
+	} else { #savings accounts
 		if ($plan == "personal") {
 			$db->createAccount($type, 0, 9, 2.0, $plan);
 		} else if ($plan == "business") {

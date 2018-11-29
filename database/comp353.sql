@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `client_account`;
 DROP TABLE IF EXISTS `account`;
 DROP TABLE IF EXISTS `client_service`;
 DROP TABLE IF EXISTS `service`;
-DROP TABLE IF EXISTS branch_manager;
+DROP TABLE IF EXISTS `branch_manager`;
 DROP TABLE IF EXISTS `charge_plan`;
 DROP TABLE IF EXISTS `employee`;
 DROP TABLE IF EXISTS `client`;
@@ -133,7 +133,6 @@ CREATE TABLE `service` (
   `service_interest` decimal(5,2) DEFAULT NULL,
   `charge_plan_id` int(11) DEFAULT NULL,
   `service_type` varchar(255) DEFAULT NULL,
-  `amount_due` decimal(11,2) DEFAULT NULL,
   PRIMARY KEY (`service_id`),
   FOREIGN KEY (`charge_plan_id`) REFERENCES `charge_plan` (`charge_id`),
   FOREIGN KEY (`manager_id`) REFERENCES `employee` (`employee_id`)
@@ -147,7 +146,10 @@ CREATE TABLE `service` (
 CREATE TABLE `client_service` (
   `client_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL,
-  PRIMARY KEY (`client_id`,`service_id`)
+  `amount_due` decimal(11,2) DEFAULT NULL,
+  PRIMARY KEY (`client_id`,`service_id`),
+  FOREIGN KEY (`client_id`) REFERENCES client (`client_id`),
+  FOREIGN KEY (`service_id`) REFERENCES service (`service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

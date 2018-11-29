@@ -15,7 +15,7 @@ USE gec353_2;
 --
 -- Data for table `branch`
 --
-LOCK TABLES `branch` WRITE;
+
 INSERT INTO `branch` VALUES (1,'Head Office','Montreal','5142347612','5147823498','1950-05-03'),
 							(2,'Beverley','Ottawa','6136548956','6138971241','1997-06-12'),
 							(3,'Ville Marrie','Montreal','5149086514','5141209475','2015-05-04'),
@@ -25,13 +25,13 @@ INSERT INTO `branch` VALUES (1,'Head Office','Montreal','5142347612','5147823498
 							(7,'West Mount','Montreal','5147890645','5145673298','2017-06-01'),
 							(8,'Cote des Neige','Montreal','5147864532','5148907632','1978-05-30'),
 							(9,'Victoria','Vancouver','6046783432','6048907889','2010-11-11');
-UNLOCK TABLES;
+
 
 
 --
 -- Data for table `employee`
 --
-LOCK TABLES `employee` WRITE;
+
 INSERT INTO `employee` VALUES (1,'Dr','Khaled','Jababo','189 Darwin Alley','1967-07-23',581103.77,'kjababo@thebank.com','1234567890','president',1),
 (2,'Rev','Jerry','Lambswood','91431 Sugar Pass','1982-11-28',393697.71,'jlambswood1@live.com','6583712463','branch manager',2),
 (3,'Rev','Den','Morriss','64 Springview Trail','1996-06-01',464053.50,'dmorriss2@un.org','4891100280','branch manager',3),
@@ -47,12 +47,12 @@ INSERT INTO `employee` VALUES (1,'Dr','Khaled','Jababo','189 Darwin Alley','1967
 (13,'Ms','Amanda','James','46 Main Street','1990-05-01',99003.04,'amandajames@google.ca','5149276152','general manager',1),
 (14,'Ms','Gina','Cody','3040 rue Sherbroke','1970-05-01',99003.04,'ginacody@concordia.ca','5141293562','general manager',1),
 (15,'Mr','James','Wilson','2020 rue Lacordaire','1992-05-01',40003.04,'jamesw@thebank.ca','5141234567','teller',2);
-UNLOCK TABLES;
+
 
 --
 -- Data for table `branch_manager`
 --
-LOCK TABLES `branch_manager` WRITE;
+
 INSERT INTO `branch_manager` VALUES (1,1),
 									(2,2),
 									(3,3),
@@ -62,23 +62,23 @@ INSERT INTO `branch_manager` VALUES (1,1),
 									(7,8),
 									(8,8),
 									(9,9);
-UNLOCK TABLES;
+
 
 --
 -- Data for table `client`
 --
-LOCK TABLES `client` WRITE;
-INSERT INTO `client` VALUES (1,'Roberto','Carlos','1978-08-09','2008-06-17','123, birch st.','r.carlos@gmail.com','5146723465',1),
-(2,'Nina','Robert','1992-02-23','2006-04-07','63, park av.','nina2002@hotmail.com','5145721241',2),
-(3,'Ron','MacTavish','1988-07-15','2003-01-27','909, pine st.','mactavish.ron@yahoo.com','5146723465',3),
-(4,'Eric','Hamel','1994-03-06','2009-06-14','999, Saint Joseph.','eric.h@gmail.com','5146123600',4),
-(5,'Lucy','Milot','1988-04-21','2013-02-13','32, park hil Av..','lm_2000@yahoo.com','5146124462',5);
-UNLOCK TABLES;
+
+INSERT INTO `client` VALUES (1,'Roberto','Carlos','1978-08-09','2008-06-17','123, birch st.','r.carlos@gmail.com','5146723465',1,0),
+(2,'Nina','Robert','1992-02-23','2006-04-07','63, park av.','nina2002@hotmail.com','5145721241',2,0),
+(3,'Ron','MacTavish','1988-07-15','2003-01-27','909, pine st.','mactavish.ron@yahoo.com','5146723465',3,0),
+(4,'Eric','Hamel','1994-03-06','2009-06-14','999, Saint Joseph.','eric.h@gmail.com','5146123600',4,0),
+(5,'Lucy','Milot','1988-04-21','2013-02-13','32, park hil Av..','lm_2000@yahoo.com','5146124462',5,0);
+
 
 --
 -- Data for table `charge_plan`
 --
-LOCK TABLES `charge_plan` WRITE;
+
 INSERT INTO `charge_plan` VALUES (1,'credit card plan',5.00,1000.00),
 								(2,'line of credit plan',10.00,25000.00),
 								(3,'mortgage plan',300.00,300000.00),
@@ -90,66 +90,65 @@ INSERT INTO `charge_plan` VALUES (1,'credit card plan',5.00,1000.00),
 								(9,'personal saving acc plan',0.00,999999.99),
 								(10,'business checking acc plan',6.00,99999999.99),
 								(11,'business saving acc plan',2.00,99999999.99);
-UNLOCK TABLES;
+
 
 --
 -- Data for table `login`
 --
-LOCK TABLES `login` WRITE;
+
 INSERT INTO `login` VALUES (1, 1234567890, "password", 1, 1),
 							(2, 0987654321, "password", 0, 1),
 							(3, 01123456789, "password", 0, 4);
-UNLOCK TABLES;
+
 
 --
 -- Data for table `service`
 --
-LOCK TABLES `service` WRITE;
-INSERT INTO `service` VALUES (1,'credit card',10,19.00,1,'banking',100.00),
-							(2,'line of credit',11,5.00,2,'banking,',100.00),
-							(3,'mortgage',12,3.00,3,'investment',100.00),
-							(4,'investment portfolio',13,8.00,4,'investment',100.00),
-							(5,'personal loan',14,10.00,5,'banking',100.00),
-							(6,'student line of credit',11,8.50,6,'banking',100.00),
-							(7,'reward credit card',10,17.00,7,'banking',60.00),
-							(8,'life insurance',13, 1.25,7,'insurance',43.00);
-UNLOCK TABLES;
+
+INSERT INTO `service` VALUES (1,'credit card',10,19.00,1,'banking'),
+							(2,'line of credit',11,5.00,2,'banking,'),
+							(3,'mortgage',12,3.00,3,'investment'),
+							(4,'investment portfolio',13,8.00,4,'investment'),
+							(5,'personal loan',14,10.00,5,'banking'),
+							(6,'student line of credit',11,8.50,6,'banking'),
+							(7,'reward credit card',10,17.00,7,'banking'),
+							(8,'life insurance',13, 1.25,7,'insurance');
+
 
 --
 -- Data for table `client_service`
 --
-LOCK TABLES `client_service` WRITE;
-INSERT INTO `client_service` VALUES (1,1),
-									(1,2),
-									(1,3),
-									(2,4),
-									(2,6),
-									(3,2),
-									(3,7),
-									(4,1),
-									(4,6),
-									(5,1),
-									(5,7);
-UNLOCK TABLES;
+
+INSERT INTO `client_service` VALUES (1,1,50.00),
+									(1,2,350.00),
+									(1,3,44.00),
+									(2,4,0.00),
+									(2,6,0.00),
+									(3,2,52.00),
+									(3,7,0.00),
+									(4,1,0.00),
+									(4,6,23.00),
+									(5,1,0.00),
+									(5,7,79.00);
+
 
 --
 -- Data for table `account`
 --
-LOCK TABLES `account` WRITE;
+
 INSERT INTO `account` VALUES (1154378,'checking',0.00,234.00,8,'personal'),
-							(7835092,'savings',2.50,25000.00,9,'business'),
-							(7843328,'checking',1.50,10000.00,8,'personal'),
-							(8736736,'savings',3.00,3000.00,9,'personal'),
-							(9056348,'savings',4.50,1000000.00,11,'business');
-UNLOCK TABLES;
+							(7835092,'savings',2.00,25000.00,9,'business'),
+							(7843328,'checking',0.00,10000.00,8,'personal'),
+							(8736736,'savings',2.00,3000.00,9,'personal'),
+							(9056348,'savings',2.00,1000000.00,11,'business');
+
 
 --
 -- Data for table `client_account`
 --
-LOCK TABLES `client_account` WRITE;
+
 INSERT INTO `client_account` VALUES (1,1154378),
 									(2,7835092),
 									(3,7843328),
 									(4,8736736),
 									(5,9056348);
-UNLOCK TABLES;

@@ -8,7 +8,7 @@ class Service {
 	private $charge_plan_id;
 	private $amount_due;
 
-	function __construct($service_id = 0, $service_name = "", $service_interest = 0.0, $manager_id = 0, $charge_plan_id = 0) {
+	function __construct($service_id = 0, $service_name = "", $service_interest = 0.0, $manager_id = 0, $charge_plan_id = 0, $amount_due= 0.0) {
 		$this->setId($service_id);
 		$this->setName($service_name);
 		$this->setInterestRate($service_interest);
