@@ -8,6 +8,7 @@
             <th scope="col">To Account</th>
             <th scope="col">To Service</th>
             <th scope="col">Amount</th>
+            <th scope="col">Date</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@ foreach ($db->getTransactionsByClient($_SESSION['client']['id']) as $transaction
             <td><?php echo $transaction['to_account']; ?></td>
             <td><?php echo $transaction['to_service']; ?></td>
             <td><?php echo '$' . $transaction['amount']; ?></td>
+            <td><?php echo $transaction['transaction_date']; ?></td>
         </tr>
     <?php }?>
         </tbody>

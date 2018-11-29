@@ -19,6 +19,7 @@ USE gec353_2;
 
 
 -- Clean out existing tables;
+DROP TABLE IF EXISTS `transactions`;
 DROP TABLE IF EXISTS `client_account`;
 DROP TABLE IF EXISTS `account`;
 DROP TABLE IF EXISTS `client_service`;

@@ -18,7 +18,7 @@ if (isset($_SESSION['message'])) {
         </select>
         <br/>
         <br/>
-        <label for="inputPassword"> Password </label>
+        <label for="inputPassword"> Account Category </label>
         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="accountPlan">
             <option value="personal"> Personal </option>
             <option value="business"> Business </option>
