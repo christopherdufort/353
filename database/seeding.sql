@@ -24,7 +24,8 @@ INSERT INTO `branch` VALUES (1,'Head Office','Montreal','5142347612','5147823498
 							(6,'West Hill','Ottawa','6139087654','6137659012','2008-08-19'),
 							(7,'West Mount','Montreal','5147890645','5145673298','2017-06-01'),
 							(8,'Cote des Neige','Montreal','5147864532','5148907632','1978-05-30'),
-							(9,'Victoria','Vancouver','6046783432','6048907889','2010-11-11');
+							(9,'Victoria','Vancouver','6046783432','6048907889','2010-11-11'),
+                            (10,'Cartier','Vancouver','2246783432','2248907889','2010-09-11');
 
 
 
@@ -46,7 +47,9 @@ INSERT INTO `employee` VALUES (1,'Dr','Khaled','Jababo','189 Darwin Alley','1967
 (12,'Ms','Jess','Foil','456 Lefebvre Street','1970-05-02',76003.04,'jessfoil@google.ca','5139476652','general manager',1),
 (13,'Ms','Amanda','James','46 Main Street','1990-05-01',99003.04,'amandajames@google.ca','5149276152','general manager',1),
 (14,'Ms','Gina','Cody','3040 rue Sherbroke','1970-05-01',99003.04,'ginacody@concordia.ca','5141293562','general manager',1),
-(15,'Mr','James','Wilson','2020 rue Lacordaire','1992-05-01',40003.04,'jamesw@thebank.ca','5141234567','teller',2);
+(15,'Mr','James','Wilson','2020 rue Lacordaire','1992-05-01',40003.04,'jamesw@thebank.ca','5141234567','teller',2),
+(16,'Mr','Joe','Zanet','2009 rue St-Pierre','1982-03-01',90003.04,'joezanet@thebank.ca','5142223099','teller',2),
+(17,'Mr','Pierre','Wilson','2010 rue Lacordaire','1990-06-01',100003.04,'pierrw@thebank.ca','514111435','teller',2);
 
 
 --
@@ -72,7 +75,12 @@ INSERT INTO `client` VALUES (1,'Roberto','Carlos','1978-08-09','2008-06-17','123
 (2,'Nina','Robert','1992-02-23','2006-04-07','63, park av.','nina2002@hotmail.com','5145721241',2,0),
 (3,'Ron','MacTavish','1988-07-15','2003-01-27','909, pine st.','mactavish.ron@yahoo.com','5146723465',3,0),
 (4,'Eric','Hamel','1994-03-06','2009-06-14','999, Saint Joseph.','eric.h@gmail.com','5146123600',4,0),
-(5,'Lucy','Milot','1988-04-21','2013-02-13','32, park hil Av..','lm_2000@yahoo.com','5146124462',5,0);
+(5,'Lucy','Milot','1988-04-21','2013-02-13','32, park hil Av..','lm_2000@yahoo.com','5146124462',5,0),
+(6,'Mark','Johnson','1982-04-21','2016-01-11','43, hilson Av..','mj_1982@gmail.com','5146124134', 6,0),
+(7,'Alice','Milot','1983-01-24','2012-01-11','32, park hil Av..','am_2099@yahoo.com','5146124432', 5,0),
+(8,'Henrik','Wilson','1991-04-21','2015-02-13','42, merton Av..','pdk@yahoo.com','5146224462',5,0),
+(9,'John','Peterson','1977-04-21','2016-02-13','12 st catherine.','peterson21@yahoo.com','5141114462',5,0),
+(10,'Alex','Milot','1998-04-21','2011-02-13','12, park hil Av..','433_2000@yahoo.com','5122220099',5,0);
 
 
 --
@@ -98,7 +106,14 @@ INSERT INTO `charge_plan` VALUES (1,'credit card plan',5.00,1000.00),
 
 INSERT INTO `login` VALUES (1, 1234567890, "password", 1, 1),
 							(2, 0987654321, "password", 0, 1),
-							(3, 01123456789, "password", 0, 4);
+							(3, 01123456789, "password", 0, 2),
+                            (4, 0983828193, "password", 0, 3),
+                            (5, 01203948756, "password", 0, 4),
+                            (6, 01203248855, "password", 0, 5),
+                            (7, 0304596950, "password", 0, 6),
+                            (8, 0401299493, "password", 0, 7),
+                            (9, 0812012031, "password", 0, 8),
+                            (10, 0912031231, "password", 0, 9);
 
 
 --
@@ -136,11 +151,15 @@ INSERT INTO `client_service` VALUES (1,1,50.00),
 -- Data for table `account`
 --
 
-INSERT INTO `account` VALUES (1154378,'checking',0.00,234.00,8,'personal'),
+INSERT INTO `account` VALUES (1154378,'checking',0.00,120000.00,8,'personal'),
+                            (1154371,'savings',0.00,120000.00,8,'business'),
 							(7835092,'savings',2.00,25000.00,9,'business'),
 							(7843328,'checking',0.00,10000.00,8,'personal'),
 							(8736736,'savings',2.00,3000.00,9,'personal'),
-							(9056348,'savings',2.00,1000000.00,11,'business');
+                            (8736712,'checking',2.00,3000.00,8,'personal'),
+                            (8736713,'checking',2.00,3000.00,8,'personal'),
+                            (1154314,'savings',2.00,50000.00,9,'personal'),
+							(9056315,'savings',2.00,1000000.00,11,'business');
 
 
 --
@@ -151,4 +170,7 @@ INSERT INTO `client_account` VALUES (1,1154378),
 									(2,7835092),
 									(3,7843328),
 									(4,8736736),
-									(5,9056348);
+									(5,9056348),
+                                    (1,8736712),
+                                    (1,1154314),
+                                    (1,9056315);

@@ -30,14 +30,13 @@
                 <td><?php echo $_SESSION['client']['joiningDate']; ?></td>
             </tr>
             <tr>
-                <th scope="row">Branch ID</th>
-                <td><?php  ?></td>
-            </tr>
-            <tr>
                 <th scope="row">Receive Alerts</th>
                 <td>
                     <form class="form-inline" action="actions.php" method="post">
-                        <input class="form-check-input" type="checkbox" name="alertsInput" <?php if ($_SESSION['client']['alerts'] == 1) echo 'checked' ?> onChange="this.form.submit()">
+                        <input class="form-check-input" type="checkbox" name="alertsInput" <?php if ($_SESSION['client']['alerts'] == 1) {
+	echo 'checked';
+}
+?> onChange="this.form.submit()">
                     </form>
                 </td>
             </tr>
