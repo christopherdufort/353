@@ -118,7 +118,8 @@ CREATE TABLE `login` (
   `password` varchar(255) DEFAULT NULL,
   `is_employee` tinyint(1) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE (`card_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
