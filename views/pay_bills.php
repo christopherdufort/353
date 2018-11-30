@@ -9,29 +9,29 @@ include 'classes/service/serviceDAO.php';
         <label class="mr-sm-2" for="inlineFormCustomSelect">From Account </label>
         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="from">
             <?php
-$db = new AccountDAO();
-foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
-	?>
+            $db = new AccountDAO();
+            foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
+                ?>
             <option value="<?php echo $account['number'] ?>"><?php echo $account['number'] ?></option>
             <?php }?>
         </select>
         <label class="mr-sm-2" for="inlineFormCustomSelect">To Service ID </label>
         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="to">
             <?php
-$db = new serviceDAO();
-foreach ($db->getServicesByClient($_SESSION['client']['id']) as $service) {
-	?>
+            $db = new serviceDAO();
+            foreach ($db->getServicesByClient($_SESSION['client']['id']) as $service) {
+                ?>
             <option value="<?php echo $service['id'] ?>"><?php echo $service['id'] ?></option>
             <?php }?>
         </select>
-        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
+        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount" min="0.00" max="99999.99" step="0.1">
         <button type="submit" class="btn btn-primary" name="paybills">Pay Bills</button>
     </form>
     <br/>
     <h1> My Services </h1>
     <br/>
     <?php
-foreach ($db->getServicesByClient($_SESSION['client']['id']) as $service) {
+    foreach ($db->getServicesByClient($_SESSION['client']['id']) as $service) {
 	?>
     <div class="card">
         <div class="card-header">
