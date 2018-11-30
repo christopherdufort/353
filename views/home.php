@@ -1,14 +1,4 @@
 <main role="main" class="container my-5">
-    <?php if (isset($_SESSION['is_logged']) && isset($_SESSION['client'])) {
-	header("Location: index.php?page=accounts");
-	exit;
-} else if (isset($_SESSION['is_logged']) && isset($_SESSION['employee'])) {
-	header("Location: index.php?page=view_branches");
-	exit;
-} else {
-	header("Location: index.php?page=login");
-	exit;
-}
-
-?>
+    <h1>Welcome to the 353 banking site!</h1>
+    <h3>Use the Links at the top left and right to navigate around!</h3>
 </main>

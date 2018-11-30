@@ -7,13 +7,11 @@ if (isset($_SESSION['message'])) {
 	unset($_SESSION['message']);
 }
 ?>
-
-
     <form class="form-signin" action="actions.php" method="post">
         <h1 class="h3 mb-3 font-weight-normal text-center"> Login </h1>
 
-        <label for="inpinputcardnumberutid"> Card Number </label>
-        <input type="text" id="inputcardnumber" name="cardNumber" class="form-control" placeholder="Client Card Number" required autofocus>
+        <label for="inpinputcardnumberutid"> Card Number (11 digit number printed on your bank card) </label>
+        <input type="number" id="inputcardnumber" name="cardNumber" class="form-control" placeholder="Client Card Number" required autofocus min="0" max="99999999999">
     </br>
         <label for="inputPassword"> Password </label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>

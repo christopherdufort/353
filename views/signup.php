@@ -12,7 +12,7 @@ if (isset($_SESSION['message'])) {
     <form class="form-signup" action="actions.php" method="post">
         <h1 class="h3 mb-3 font-weight-normal text-center"> Sign up </h1>
         <label for="cardNumber">Client Card Number </label>
-        <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="Client Card Number" required autofocus>
+        <input type="number" id="cardNumber" name="cardNumber" class="form-control" placeholder="Client Card Number" required min="0" max="99999999999" autofocus>
         <label for="inputPassword"> Password </label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <label for="inputFirstName"> First Name </label>
@@ -26,7 +26,7 @@ if (isset($_SESSION['message'])) {
         <label for="inputEmail"> Email </label>
         <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required>
         <label for="inputPhone"> Phone ex(0001112222)</label>
-        <input type="text" id="inputPhone" name="phone" class="form-control" placeholder="Phone" required>
+        <input type="number" id="inputPhone" name="phone" class="form-control" placeholder="Phone" min="0" max="9999999999" required>
         <br/>
         <button class="btn btn-lg btn-info btn-block" type="submit" name="signup" value="Signup"> Signup </button>
     </form>
