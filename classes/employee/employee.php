@@ -112,7 +112,7 @@
 			return $this->works_for_branch;
 		}
 
-		public function setBranchId($branch_id){
+		public function setBranchId($works_for_branch){
 			$this->works_for_branch = $works_for_branch;
 		}
 

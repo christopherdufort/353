@@ -20,7 +20,7 @@
                 <option value="<?php echo $account['number'] ?>"><?php echo $account['number'] ?></option>
             <?php }?>
         </select>
-        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
         <button type="submit" class="btn btn-primary" name="transfer">Transfer</button>
     </form>
     </br>
