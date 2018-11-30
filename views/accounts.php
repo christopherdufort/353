@@ -12,18 +12,18 @@
                     $db = new AccountDAO();
                     foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
                         ?>
-                    <option value="<?php echo $account['number'] ?>"><?php echo $account['number'] ?></option>
+                        <option value="<?php echo $account['number'] ?>"><?php echo $account['number'] ?></option>
                     <?php }?>
                 </select>
                 <label class="mr-sm-2" for="inlineFormCustomSelect">To</label>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="to">
                     <?php
-                        foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
-                            ?>
+                    foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
+                        ?>
                         <option value="<?php echo $account['number'] ?>"><?php echo $account['number'] ?></option>
                     <?php }?>
                 </select>
-                <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
                 <button type="submit" class="btn btn-primary" name="transfer">Transfer</button>
             </form>
         </div>

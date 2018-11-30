@@ -199,6 +199,36 @@ class EmployeeDAO {
 		}
 	}
 
+	public function getEmployeesForManagers() {
+		try {
+			$pdo = new PDO($this->connectString, $this->user, $this->password);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$stmt = $pdo->prepare("SELECT * FROM employee WHERE employee_type='general manager' OR employee_type='branch manager' OR employee_type='teller'");
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Employee');
+			while ($employee = $stmt->fetch()) {
+				$responseRow["id"] = $employee->getId();
+				$responseRow["title"] = $employee->getTitle();
+				$responseRow["firstName"] = $employee->getFirstName();
+				$responseRow["lastName"] = $employee->getLastName();
+				$responseRow["email"] = $employee->getEmail();
+				$responseRow["phone"] = $employee->getPhone();
+				$responseRow["address"] = $employee->getAddress();
+				$responseRow["type"] = $employee->getType();
+				$responseRow["salary"] = $employee->getSalary();
+				$responseRow["startDate"] = $employee->getStartDate();
+				$responseRow["branchId"] = $employee->getBranchId();
+
+				$response[] = $responseRow;
+			}
+			return $response;
+		} catch (PDOException $e) {
+			echo ($e->getMessage());
+		} finally {
+			unset($pdo);
+		}
+	}
+
 	public function getAllEmployees() {
 		try {
 			$pdo = new PDO($this->connectString, $this->user, $this->password);

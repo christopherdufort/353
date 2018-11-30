@@ -24,7 +24,7 @@ foreach ($db->getServicesByClient($_SESSION['client']['id']) as $service) {
             <option value="<?php echo $service['id'] ?>"><?php echo $service['id'] ?></option>
             <?php }?>
         </select>
-        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
         <button type="submit" class="btn btn-primary" name="paybills">Pay Bills</button>
     </form>
     <br/>

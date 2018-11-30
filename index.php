@@ -30,6 +30,10 @@ if (isset($_GET['page'])) {
 		include "views/transactions.php";
 	} else if ($_GET['page'] == 'add_account') {
 		include "views/add_account.php";
+	} else if ($_GET['page'] == 'view_clients') {
+		include "views/view_clients.php";
+	} else if ($_GET['page'] == 'view_employees') {
+		include "views/view_employees.php";
 	}} else {
 	include "views/home.php";
 }

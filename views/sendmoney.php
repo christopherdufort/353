@@ -14,7 +14,7 @@ foreach ($db->getAccountsByClient($_SESSION['client']['id']) as $account) {
         </select>
         <label class="mr-sm-2" for="inlineFormCustomSelect">To</label>
         <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Email or Phone" name="to">
-        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount">
         <button type="submit" class="btn btn-primary" name="etransfer">eTransfer</button>
     </form>
 </main>
