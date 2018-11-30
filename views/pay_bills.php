@@ -24,7 +24,7 @@ include 'classes/service/serviceDAO.php';
             <option value="<?php echo $service['id'] ?>"><?php echo $service['id'] ?></option>
             <?php }?>
         </select>
-        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount" min="0.00" max="99999.99" step="0.1">
+        <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputGroup" placeholder="Amount" name="amount" min="0.00" max="99999.99" step="0.01">
         <button type="submit" class="btn btn-primary" name="paybills">Pay Bills</button>
     </form>
     <br/>
