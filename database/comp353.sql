@@ -88,7 +88,7 @@ CREATE TABLE `client` (
   `birth_date` date DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL UNIQUE,
   `phone` varchar(10) DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `alerts` tinyint(1) DEFAULT 0,
@@ -115,7 +115,7 @@ CREATE TABLE `charge_plan` (
 
 CREATE TABLE `login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `card_number` int(11) DEFAULT NULL,
+  `card_number` bigint(20) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `is_employee` tinyint(1) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
